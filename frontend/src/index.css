@@ -32,6 +32,44 @@ body {
   line-height: 1.5;
 }
 
+/* ERP Shell Layout */
+.erp-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at top left, #0f1c3f, var(--bg-primary) 80%);
+}
+
+.erp-main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.erp-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: rgba(13, 24, 53, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  gap: 1rem;
+}
+
+.erp-page-body {
+  padding: 1.5rem 2rem 3rem;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 /* Header */
 header {
   background: rgba(16, 31, 66, 0.85);

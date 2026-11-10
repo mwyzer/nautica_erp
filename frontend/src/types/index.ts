@@ -1,3 +1,14 @@
+export type ERPModule =
+  | 'vessel'
+  | 'crew'
+  | 'maintenance'
+  | 'inventory'
+  | 'procurement'
+  | 'finance'
+  | 'voyage'
+  | 'documents'
+  | 'copilot';
+
 export interface Vessel {
   id: number;
   imo_number: string;
@@ -11,6 +22,84 @@ export interface Vessel {
   fuel_burn_rate_mt_per_day: number;
   created_at?: string;
   updated_at?: string;
+}
+
+export interface CrewCertification {
+  id: number;
+  crew_id: number;
+  cert_type: string;
+  cert_number: string;
+  issue_date: string;
+  expiry_date: string;
+  is_valid: boolean;
+}
+
+export interface CrewMember {
+  id: number;
+  seafarer_id: string;
+  full_name: string;
+  rank: string;
+  assigned_vessel_id: number | null;
+  status: string;
+  created_at?: string;
+  certifications?: CrewCertification[];
+}
+
+export interface MaintenanceTicket {
+  id: number;
+  vessel_id: number;
+  equipment_name: string;
+  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  status: 'OPEN' | 'IN_PROGRESS' | 'RESOLVED';
+  description: string;
+  reported_at: string;
+  prevents_clearance: boolean;
+}
+
+export interface InventoryItem {
+  id: number;
+  item_code: string;
+  name: string;
+  category: 'SPARE_PARTS' | 'BUNKER_FUEL' | 'LUBRICANTS' | 'SAFETY_EQUIPMENT';
+  quantity: number;
+  unit: string;
+  min_stock_level: number;
+  unit_price_usd: number;
+  location: string;
+  status: 'OPTIMAL' | 'REORDER_NOW' | 'CRITICAL_LOW';
+}
+
+export interface ProcurementOrder {
+  id: number;
+  po_number: string;
+  vendor_name: string;
+  category: 'BUNKER_SUPPLY' | 'ENGINE_SPARES' | 'PROVISIONS' | 'SAFETY_GEAR';
+  total_amount_usd: number;
+  order_date: string;
+  expected_delivery: string;
+  status: 'PENDING_APPROVAL' | 'APPROVED' | 'IN_TRANSIT' | 'DELIVERED';
+  target_vessel: string;
+}
+
+export interface FinanceSummary {
+  total_opex_mtd_usd: number;
+  fuel_expenses_usd: number;
+  crew_payroll_usd: number;
+  port_disbursements_usd: number;
+  maintenance_costs_usd: number;
+  projected_savings_ai_usd: number;
+}
+
+export interface MaritimeDocument {
+  id: number;
+  doc_number: string;
+  title: string;
+  doc_type: 'STATUTORY_VESSEL' | 'CREW_STCW' | 'PORT_CLEARANCE' | 'CLASS_SURVEY';
+  issuing_authority: string;
+  vessel_or_seafarer: string;
+  issue_date: string;
+  expiry_date: string;
+  status: 'VALID' | 'EXPIRING_SOON' | 'EXPIRED';
 }
 
 export interface Voyage {
