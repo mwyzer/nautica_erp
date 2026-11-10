@@ -109,8 +109,14 @@ export default function AICopilotSection(): React.JSX.Element {
           <button className="chip-btn" onClick={() => handleSend('Apakah ada anomali konsumsi bunker pada armada?')}>
             ⛽ Cek Anomali BBM
           </button>
-          <button className="chip-btn" onClick={() => handleSend('Tampilkan rencana pelayaran aktif')}>
-            🗺️ Rencana Pelayaran
+          <button className="chip-btn" onClick={() => handleSend('Berapa batas sulfur bahan bakar menurut MARPOL Annex VI di kawasan SECA?')}>
+            📜 Batas Sulfur MARPOL Annex VI (RAG)
+          </button>
+          <button className="chip-btn" onClick={() => handleSend('Berapa jam istirahat minimum perwira jaga menurut konvensi STCW?')}>
+            ⚖️ Jam Istirahat STCW (RAG)
+          </button>
+          <button className="chip-btn" onClick={() => handleSend('Apa syarat kelaiklautan kemudi darurat menurut SOLAS Ch II-1?')}>
+            🛡️ Kelaiklautan SOLAS (RAG)
           </button>
           <button className="chip-btn" onClick={() => handleSend('Kapal mana yang siap berlayar ke Singapura?')}>
             🧭 Kapal Siap ke Singapura?

@@ -160,6 +160,18 @@ async def verify_crew_stcw_compliance(vessel_id: int) -> str:
         return json.dumps({"vessel_id": vessel_id, "assigned_crew": report}, indent=2)
 
 
+@mcp.tool()
+async def query_maritime_regulations_rag(query: str) -> str:
+    """Semantic RAG retrieval over official maritime conventions (SOLAS, MARPOL Annex VI, STCW Manila 2010, ISM Code).
+    
+    Use this tool to verify statutory compliance, legal fuel sulfur limits, mandatory seafarer rest hours,
+    steering gear seaworthiness rules, or emergency SOPEP response plans.
+    """
+    from app.services.rag_service import maritime_rag
+    result = await maritime_rag.answer_query(query, top_k=3)
+    return json.dumps(result, indent=2)
+
+
 # ==============================================================================
 # MCP RESOURCES
 # ==============================================================================

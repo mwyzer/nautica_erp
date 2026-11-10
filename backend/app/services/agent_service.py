@@ -177,6 +177,27 @@ Respond strictly in valid JSON format with two keys:
         """Conversational Maritime Superintendent Agent capable of querying live ERP fleet data."""
         msg_lower = user_message.lower().strip()
 
+        # Tool 0: Maritime Regulation RAG (SOLAS, MARPOL, STCW, SOPEP, ISM Code)
+        rag_keywords = [
+            "solas", "marpol", "stcw", "sopep", "ism", "sulfur", "belerang", "regulasi",
+            "aturan", "konvensi", "hukum", "istirahat", "bdn", "sample", "manila",
+            "kelaiklautan", "emisi", "eca", "seca"
+        ]
+        if any(w in msg_lower for w in rag_keywords):
+            try:
+                from app.services.rag_service import maritime_rag
+                rag_res = await maritime_rag.answer_query(user_message, top_k=3)
+                if rag_res.get("is_rag_grounded"):
+                    citations_str = "\n\n📚 **Rujukan Regulasi Maritim:**\n" + "\n".join([f"• {c}" for c in rag_res["citations"]])
+                    return {
+                        "query": user_message,
+                        "reply": rag_res["answer"] + citations_str,
+                        "tool_executed": "maritime_regulation_rag",
+                        "data": rag_res.get("sources")
+                    }
+            except Exception as rag_err:
+                logger.error(f"Error executing Maritime RAG: {rag_err}")
+
         # Tool 4: Singapore readiness check
         if any(w in msg_lower for w in ["singapura", "singapore"]):
             try:
