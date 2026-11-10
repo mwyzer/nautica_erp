@@ -38,7 +38,32 @@ import {
 import { RefreshCw, Bell, ShieldCheck } from 'lucide-react';
 
 export default function App(): React.JSX.Element {
-  const [activeModule, setActiveModule] = useState<ERPModule>('vessel');
+  const getInitialModule = (): ERPModule => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      return hash as ERPModule;
+    }
+    return 'vessel';
+  };
+
+  const [activeModule, setActiveModuleState] = useState<ERPModule>(getInitialModule);
+
+  const setActiveModule = (mod: ERPModule) => {
+    window.location.hash = mod;
+    setActiveModuleState(mod);
+  };
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        setActiveModuleState(hash as ERPModule);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   const [vessels, setVessels] = useState<Vessel[]>([]);
   const [voyages, setVoyages] = useState<Voyage[]>([]);
   const [bunkerLogs, setBunkerLogs] = useState<BunkerLog[]>([]);
