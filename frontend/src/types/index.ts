@@ -19,6 +19,9 @@ export type ERPModule =
   | 'crew_payroll'
   | 'emergency_alarms'
   | 'ballast_stability'
+  | 'iot_engine'
+  | 'port_call_jit'
+  | 'piracy_security'
   | 'copilot';
 
 // --- AI Weather Routing & Eco Speed Types ---
@@ -486,4 +489,145 @@ export interface BallastExchangeLog {
   uv_reactor_power_kw: number;
   compliance_standard: string;
   port_inspector_status: string;
+}
+
+// --- IoT Engine Room Telemetry & CBM Types ---
+export interface CylinderTelemetry {
+  cylinder_num: number;
+  exhaust_temp_c: number;
+  exhaust_deviation_c: number;
+  p_max_bar: number;
+  p_comp_bar: number;
+  piston_ring_wear_percent: number;
+  status: 'NORMAL' | 'WARNING_DEVIATION' | 'CRITICAL_SCAVENGE_FIRE_RISK';
+}
+
+export interface TurbochargerTelemetry {
+  turbo_id: string;
+  rpm: number;
+  scavenge_air_pressure_bar: number;
+  air_cooler_dp_bar: number;
+  turbine_inlet_temp_c: number;
+  turbine_outlet_temp_c: number;
+  vibration_rms_mm_s: number;
+  status: 'HEALTHY' | 'COOLER_FOULING' | 'SURGE_RISK';
+}
+
+export interface LubeOilTelemetry {
+  main_bearing_pressure_bar: number;
+  oil_temp_c: number;
+  viscosity_cst: number;
+  water_in_oil_percent: number;
+  filter_dp_bar: number;
+  status: 'NORMAL' | 'HIGH_TEMP' | 'WATER_CONTAMINATION';
+}
+
+export interface EngineVibrationTelemetry {
+  crankshaft_vibration_rms: number;
+  bearing_vibration_rms: number;
+  iso_10816_class_threshold: number;
+  dominant_frequency_hz: number;
+  bearing_health_score: number;
+  status: 'NORMAL' | 'ELEVATED_VIBRATION' | 'STRUCTURAL_RISK';
+}
+
+export interface EngineRoomLiveSnapshot {
+  vessel_id: number;
+  vessel_name: string;
+  engine_model: string;
+  timestamp: string;
+  is_engine_running: boolean;
+  engine_rpm: number;
+  shaft_power_kw: number;
+  shaft_torque_knm: number;
+  sfoc_g_kwh: number;
+  sfoc_deviation_percent: number;
+  mean_indicated_pressure_bar: number;
+  cylinders: CylinderTelemetry[];
+  turbocharger: TurbochargerTelemetry;
+  lube_oil: LubeOilTelemetry;
+  vibration: EngineVibrationTelemetry;
+  cbm_health_grade: string;
+  alerts: string[];
+  maintenance_recommendations: string[];
+}
+
+// --- Port Call JIT Arrival Types ---
+export interface PortCallSchedule {
+  id: number;
+  vessel_id: number;
+  vessel_name: string;
+  voyage_number: string;
+  destination_port: string;
+  terminal_berth: string;
+  original_eta: string;
+  berth_readiness_time: string;
+  jit_adjusted_eta: string;
+  distance_remaining_nm: number;
+  full_ahead_speed_knots: number;
+  jit_recommended_speed_knots: number;
+  anchorage_waiting_hours_saved: number;
+  fuel_saved_mt: number;
+  cost_saved_usd: number;
+  co2_reduction_mt: number;
+  vts_slot_status: string;
+  pilot_booked: boolean;
+  tugs_allocated: number;
+}
+
+export interface OptimizeJITResponse {
+  vessel_id: number;
+  distance_nm: number;
+  full_speed_knots: number;
+  jit_speed_knots: number;
+  transit_hours_full: number;
+  transit_hours_jit: number;
+  anchorage_hours_eliminated: number;
+  fuel_full_mt: number;
+  fuel_jit_mt: number;
+  fuel_saved_mt: number;
+  cost_saved_usd: number;
+  co2_saved_mt: number;
+  recommendation: string;
+}
+
+// --- Piracy & HRA Security Intelligence Types ---
+export interface HighRiskZone {
+  zone_id: string;
+  zone_name: string;
+  ocean_basin: string;
+  risk_level: string;
+  description: string;
+  recommended_min_speed_knots: number;
+  irtc_corridor_active: boolean;
+  ukmto_contact: string;
+}
+
+export interface PiracyIncident {
+  id: number;
+  incident_date: string;
+  location_name: string;
+  latitude: number;
+  longitude: number;
+  vessel_type: string;
+  attack_type: string;
+  countermeasure_applied: string;
+  outcome: string;
+}
+
+export interface VesselSecurityReadiness {
+  vessel_id: number;
+  vessel_name: string;
+  current_threat_zone: string;
+  bmp5_compliance_percent: number;
+  razor_wire_installed: boolean;
+  water_cannons_pressurized: boolean;
+  citadel_locked_and_provisioned: boolean;
+  citadel_days_provisions: number;
+  armed_security_onboard: boolean;
+  pcasp_guard_count: number;
+  ais_silent_mode_authorized: boolean;
+  ukmto_transit_registered: boolean;
+  security_drill_last_date: string;
+  overall_security_status: string;
 }

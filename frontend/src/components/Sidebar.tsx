@@ -20,7 +20,8 @@ import {
   FileCheck,
   CreditCard,
   Bell,
-  Scale
+  Scale,
+  Cpu
 } from 'lucide-react';
 import { ERPModule } from '../types';
 
@@ -74,6 +75,12 @@ export default function Sidebar({
           label: 'Digital SPB & IMO FAL',
           desc: 'Izin berlayar & sertifikat QR',
           icon: <FileCheck size={18} />,
+        },
+        {
+          id: 'port_call_jit' as ERPModule,
+          label: 'Port Call JIT Arrival',
+          desc: 'Optimasi kecepatan sandar dermaga',
+          icon: <Clock size={18} />,
         },
         {
           id: 'cargo_stowage' as ERPModule,
@@ -130,6 +137,12 @@ export default function Sidebar({
           badgeColor: 'var(--danger)',
         },
         {
+          id: 'iot_engine' as ERPModule,
+          label: 'IoT Engine Telemetry & CBM',
+          desc: 'Telemetri 1Hz silinder & getaran',
+          icon: <Cpu size={18} />,
+        },
+        {
           id: 'noon_report' as ERPModule,
           label: 'Daily Noon Report',
           desc: 'Telemetri 24h & biofouling',
@@ -170,6 +183,12 @@ export default function Sidebar({
           id: 'hseq' as ERPModule,
           label: 'HSEQ Safety & PSC',
           desc: 'Investigasi insiden & vetting',
+          icon: <ShieldAlert size={18} />,
+        },
+        {
+          id: 'piracy_security' as ERPModule,
+          label: 'Piracy & HRA Security (BMP5)',
+          desc: 'Intelijen perompakan & Citadel',
           icon: <ShieldAlert size={18} />,
         },
         {

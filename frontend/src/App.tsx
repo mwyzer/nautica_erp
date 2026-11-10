@@ -21,6 +21,9 @@ import CargoStowageSection from './components/CargoStowageSection';
 import CrewPayrollSection from './components/CrewPayrollSection';
 import EmergencyAlarmSection from './components/EmergencyAlarmSection';
 import BallastStabilitySection from './components/BallastStabilitySection';
+import IoTEngineSection from './components/IoTEngineSection';
+import PortCallJITSection from './components/PortCallJITSection';
+import PiracySecuritySection from './components/PiracySecuritySection';
 import AICopilotSection from './components/AICopilotSection';
 import ClearanceAuditModal from './components/ClearanceAuditModal';
 import {
@@ -196,6 +199,21 @@ export default function App(): React.JSX.Element {
         return {
           title: 'Ballast Water Management & Ship Stability Simulator (IMO D-2)',
           desc: 'Kalkulator stabilitas utuh (GM, Trim, List, Bending Moment) & logbook pertukaran air balas internasional',
+        };
+      case 'iot_engine':
+        return {
+          title: 'IoT Engine Room Telemetry & Condition-Based Monitoring (CBM)',
+          desc: 'Telemetri 1Hz termal silinder 1-6, turbocharger, getaran ISO 10816 & SFOC baling-baling',
+        };
+      case 'port_call_jit':
+        return {
+          title: 'Port Call Optimization & Just-In-Time (JIT) Arrival Engine',
+          desc: 'Sinkronisasi kecepatan Virtual Arrival dengan slot dermaga VTS & eliminasi waktu lego jangkar',
+        };
+      case 'piracy_security':
+        return {
+          title: 'Piracy & High-Risk Area (HRA) Security Intelligence (BMP5 / IMB)',
+          desc: 'Radar ancaman perompakan IMB, koridor IRTC, pengerasan fisik BMP5 & prosedur Citadel',
         };
       case 'copilot':
         return {
@@ -424,6 +442,18 @@ export default function App(): React.JSX.Element {
 
           {activeModule === 'ballast_stability' && (
             <BallastStabilitySection vessels={vessels} />
+          )}
+
+          {activeModule === 'iot_engine' && (
+            <IoTEngineSection vessels={vessels} />
+          )}
+
+          {activeModule === 'port_call_jit' && (
+            <PortCallJITSection />
+          )}
+
+          {activeModule === 'piracy_security' && (
+            <PiracySecuritySection vessels={vessels} />
           )}
 
           {activeModule === 'copilot' && (

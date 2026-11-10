@@ -18,6 +18,9 @@ from app.api.cargo_stowage import router as stowage_router
 from app.api.payroll import router as payroll_router
 from app.api.alarms import router as alarms_router
 from app.api.ballast_stability import router as ballast_stability_router
+from app.api.iot_engine import router as iot_engine_router
+from app.api.port_call_jit import router as port_call_jit_router
+from app.api.piracy_security import router as piracy_security_router
 
 api_router = APIRouter()
 
@@ -40,3 +43,6 @@ api_router.include_router(stowage_router)
 api_router.include_router(payroll_router)
 api_router.include_router(alarms_router)
 api_router.include_router(ballast_stability_router)
+api_router.include_router(iot_engine_router)
+api_router.include_router(port_call_jit_router)
+api_router.include_router(piracy_security_router)

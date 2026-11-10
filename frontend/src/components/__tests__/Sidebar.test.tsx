@@ -28,11 +28,14 @@ describe('Sidebar Component', () => {
     expect(screen.getByText('AIS Live Fleet Map')).toBeInTheDocument();
     expect(screen.getByText('AI Weather Routing')).toBeInTheDocument();
     expect(screen.getByText('Digital SPB & IMO FAL')).toBeInTheDocument();
+    expect(screen.getByText('Port Call JIT Arrival')).toBeInTheDocument();
     expect(screen.getByText('Cargo Bay Plan & IMDG')).toBeInTheDocument();
     expect(screen.getByText('Chartering & Demurrage')).toBeInTheDocument();
     expect(screen.getByText('Crew Payroll (MLC 2006)')).toBeInTheDocument();
+    expect(screen.getByText('IoT Engine Telemetry & CBM')).toBeInTheDocument();
     expect(screen.getByText('IMO CII Decarbonization')).toBeInTheDocument();
     expect(screen.getByText('Ballast & Ship Stability')).toBeInTheDocument();
+    expect(screen.getByText('Piracy & HRA Security (BMP5)')).toBeInTheDocument();
     expect(screen.getByText('Emergency Alarms')).toBeInTheDocument();
   });
 
