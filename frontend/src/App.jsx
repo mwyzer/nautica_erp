@@ -87,12 +87,18 @@ export default function App() {
         {activeTab === 'voyages' && (
           <VoyagesSection
             voyages={voyages}
+            vessels={vessels}
             onAuditClick={handleAuditClick}
             onRefresh={fetchData}
           />
         )}
 
-        {activeTab === 'fleet' && <FleetSection vessels={vessels} />}
+        {activeTab === 'fleet' && (
+          <FleetSection
+            vessels={vessels}
+            onRefresh={fetchData}
+          />
+        )}
 
         {activeTab === 'bunker' && <BunkerSection bunkerLogs={bunkerLogs} />}
 
