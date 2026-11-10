@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     
     # AI Agent Configuration
     GEMINI_API_KEY: Optional[str] = None
-    GEMINI_MODEL: str = "gemini-3.8-flash"
+    GEMINI_MODEL: str = "gemini-3.5-flash-lite"
     
     # Maritime Safety Margins
     BUNKER_SAFETY_BUFFER_PERCENT: float = 15.0  # Required + 15% reserve fuel

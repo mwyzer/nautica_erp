@@ -18,7 +18,7 @@ class CrewMember(Base):
     rank: Mapped[str] = mapped_column(String(50), nullable=False)  # MASTER, CHIEF_ENGINEER, FIRST_MATE, 2ND_ENGINEER, ABLE_SEAMAN
     assigned_vessel_id: Mapped[Optional[int]] = mapped_column(ForeignKey("vessels.id", ondelete="SET NULL"), nullable=True)
     status: Mapped[str] = mapped_column(String(30), default="ON_BOARD")  # ON_BOARD, ON_SHORE, ON_LEAVE
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
     # Relationships
     assigned_vessel = relationship("Vessel", back_populates="crew_members")
@@ -37,7 +37,7 @@ class CrewCertification(Base):
     issue_date: Mapped[date] = mapped_column(Date, nullable=False)
     expiry_date: Mapped[date] = mapped_column(Date, nullable=False, index=True)
     is_valid: Mapped[bool] = mapped_column(Boolean, default=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
     # Relationships
     crew_member = relationship("CrewMember", back_populates="certifications")

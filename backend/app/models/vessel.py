@@ -21,8 +21,8 @@ class Vessel(Base):
     current_port: Mapped[str] = mapped_column(String(50), default="IDJKT")
     avg_speed_knots: Mapped[float] = mapped_column(Float, default=14.0)
     fuel_burn_rate_mt_per_day: Mapped[float] = mapped_column(Float, default=22.0)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
     # Relationships
     voyages = relationship("Voyage", back_populates="vessel", cascade="all, delete-orphan")

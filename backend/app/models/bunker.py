@@ -19,7 +19,7 @@ class BunkerLog(Base):
     current_rob_mt: Mapped[float] = mapped_column(Float, nullable=False)  # Remaining On Board (MT)
     daily_consumption_mt: Mapped[float] = mapped_column(Float, default=0.0)
     speed_knots: Mapped[float] = mapped_column(Float, default=0.0)
-    recorded_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    recorded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     anomaly_flag: Mapped[bool] = mapped_column(Boolean, default=False)
     anomaly_reason: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
 

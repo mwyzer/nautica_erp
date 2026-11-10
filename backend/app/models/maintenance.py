@@ -17,7 +17,7 @@ class MaintenanceTicket(Base):
     severity: Mapped[str] = mapped_column(String(30), default="MEDIUM")  # LOW, MEDIUM, HIGH, CRITICAL
     status: Mapped[str] = mapped_column(String(30), default="OPEN")  # OPEN, IN_PROGRESS, RESOLVED
     description: Mapped[str] = mapped_column(Text, nullable=False)
-    reported_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    reported_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     prevents_clearance: Mapped[bool] = mapped_column(Boolean, default=False)
 
     # Relationships

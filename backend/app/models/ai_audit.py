@@ -20,7 +20,7 @@ class AIClearanceAudit(Base):
     maintenance_risk_status: Mapped[str] = mapped_column(String(50), nullable=False)
     ai_summary: Mapped[str] = mapped_column(Text, nullable=False)
     recommended_actions: Mapped[Optional[List[str]]] = mapped_column(JSON, default=list)
-    audited_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    audited_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
     # Relationships
     voyage = relationship("Voyage", back_populates="ai_audits")

@@ -41,8 +41,21 @@ export default function AICopilotSection() {
       const data = await res.json();
 
       let reply = data.reply;
-      if (data.data && Array.isArray(data.data)) {
-        reply += '\n\n' + data.data.map(item => `• ${item.name || item.route || item.fuel_type}: ${JSON.stringify(item)}`).join('\n');
+      if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+        const formattedItems = data.data.map(item => {
+          if (item.name && item.imo) {
+            return `🚢 **${item.name}** (${item.imo}) — Status: \`${item.status}\` | Pelabuhan: ${item.port} | Burn: ${item.burn_rate_mt} MT/hari`;
+          }
+          if (item.voyage_number) {
+            return `🗺️ **${item.voyage_number}** (${item.route || item.vessel}) — Status: \`${item.status}\` | Clearance: \`${item.clearance || 'PENDING'}\``;
+          }
+          if (item.fuel_type) {
+            const flag = item.anomaly_flag ? `⚠️ [ANOMALI: ${item.reason}]` : '✅ Normal';
+            return `⛽ Vessel #${item.vessel_id} (${item.fuel_type}) — ROB: ${item.current_rob_mt} MT | Konsumsi: ${item.daily_consumption_mt} MT/hari | ${flag}`;
+          }
+          return `• ${JSON.stringify(item)}`;
+        });
+        reply += '\n\n' + formattedItems.join('\n');
       }
 
       setMessages(prev => [

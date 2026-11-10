@@ -61,13 +61,17 @@ if os.path.exists(os.path.join(react_dist_path, "assets")):
 app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 
 
-@app.get("/dashboard", tags=["Frontend"], response_class=FileResponse)
+@app.get("/dashboard", tags=["Frontend"])
 async def serve_dashboard():
     """Serves the Maritime Operations Command Center React SPA."""
     react_index = os.path.join(react_dist_path, "index.html")
     if os.path.exists(react_index):
         return FileResponse(react_index)
-    return {"message": "React frontend is running in dev mode or not yet built. Run 'npm run dev' inside frontend/ directory."}
+    return {
+        "message": "React frontend is running in dev mode on port 5173. Visit http://localhost:5173",
+        "frontend_dev_url": "http://localhost:5173",
+        "api_docs_url": "/docs"
+    }
 
 
 @app.get("/", tags=["System"])

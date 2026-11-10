@@ -28,16 +28,20 @@ services:
     restart: always
     ports:
       - "8000:8000"
+    volumes:
+      - ./backend:/app
+    env_file:
+      - .env
     environment:
       - PROJECT_NAME=Nautical ERP Automation
       - DATABASE_URL=postgresql+asyncpg://postgres:nautical_secret_password@db:5432/nautical_db
       - GEMINI_API_KEY=${GEMINI_API_KEY}
-      - GEMINI_MODEL=gemini-3.8-flash
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.5-flash-lite}
       - BUNKER_SAFETY_BUFFER_PERCENT=15.0
     depends_on:
       db:
         condition: service_healthy
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: sh -c "python -m app.seed && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
 
   frontend:
     build:
@@ -47,6 +51,11 @@ services:
     restart: always
     ports:
       - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_BACKEND_URL=http://backend:8000
     depends_on:
       - backend
 
