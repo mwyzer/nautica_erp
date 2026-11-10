@@ -16,42 +16,73 @@ export default function KpiGrid({ vessels, voyages, bunkerLogs }: KpiGridProps):
 
   return (
     <section className="kpi-grid">
+      {/* 1. Armada Aktif */}
       <div className="kpi-card">
         <div className="kpi-header">
           <span className="kpi-title">Armada Aktif</span>
-          <Ship size={20} color="var(--accent-cyan)" />
+          <div className="kpi-icon-badge kpi-icon-cyan">
+            <Ship size={20} />
+          </div>
         </div>
-        <div className="kpi-value">{activeVessels} <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>/ {vessels.length} Kapal</span></div>
-        <div className="kpi-sub">Unit terpantau beroperasi</div>
+        <div className="kpi-body">
+          <div className="kpi-value">
+            {activeVessels}
+            <span style={{ fontSize: '0.95rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>
+              / {vessels.length} Kapal
+            </span>
+          </div>
+          <div className="kpi-sub">Unit kapal terpantau aktif beroperasi</div>
+        </div>
       </div>
 
+      {/* 2. Pelayaran Terjadwal */}
       <div className="kpi-card">
         <div className="kpi-header">
           <span className="kpi-title">Pelayaran Terjadwal</span>
-          <Navigation size={20} color="var(--accent-teal)" />
+          <div className="kpi-icon-badge kpi-icon-teal">
+            <Navigation size={20} />
+          </div>
         </div>
-        <div className="kpi-value">{activeVoyages}</div>
-        <div className="kpi-sub">{pendingClearances} menunggu otorisasi clearance</div>
+        <div className="kpi-body">
+          <div className="kpi-value">{activeVoyages}</div>
+          <div className="kpi-sub">
+            <strong style={{ color: pendingClearances > 0 ? 'var(--warning)' : 'var(--text-muted)' }}>
+              {pendingClearances}
+            </strong> pelayaran menunggu otorisasi clearance
+          </div>
+        </div>
       </div>
 
+      {/* 3. Bunker Fuel Monitored */}
       <div className="kpi-card">
         <div className="kpi-header">
           <span className="kpi-title">Bunker Fuel Monitored</span>
-          <Fuel size={20} color="var(--success)" />
+          <div className="kpi-icon-badge kpi-icon-green">
+            <Fuel size={20} />
+          </div>
         </div>
-        <div className="kpi-value">{bunkerLogs.length}</div>
-        <div className="kpi-sub">Total log konsumsi harian</div>
+        <div className="kpi-body">
+          <div className="kpi-value">{bunkerLogs.length}</div>
+          <div className="kpi-sub">Total laporan harian (noon reports) tercatat</div>
+        </div>
       </div>
 
+      {/* 4. Anomali Konsumsi BBM */}
       <div className="kpi-card">
         <div className="kpi-header">
           <span className="kpi-title">Anomali Konsumsi BBM</span>
-          <AlertTriangle size={20} color={bunkerAnomalies > 0 ? "var(--warning)" : "var(--success)"} />
+          <div className={`kpi-icon-badge ${bunkerAnomalies > 0 ? 'kpi-icon-warning' : 'kpi-icon-green'}`}>
+            <AlertTriangle size={20} />
+          </div>
         </div>
-        <div className="kpi-value" style={{ color: bunkerAnomalies > 0 ? "var(--warning)" : "var(--success)" }}>
-          {bunkerAnomalies}
+        <div className="kpi-body">
+          <div className="kpi-value" style={{ color: bunkerAnomalies > 0 ? 'var(--warning)' : 'var(--success)' }}>
+            {bunkerAnomalies}
+          </div>
+          <div className="kpi-sub">
+            {bunkerAnomalies > 0 ? 'Deviasi konsumsi > 35% terdeteksi radar' : 'Seluruh armada dalam konsumsi normal'}
+          </div>
         </div>
-        <div className="kpi-sub">Deviasi konsumsi &gt; 35% terdeteksi</div>
       </div>
     </section>
   );
