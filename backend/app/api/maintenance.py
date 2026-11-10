@@ -44,3 +44,13 @@ async def resolve_ticket(ticket_id: int, db: AsyncSession = Depends(get_db)):
     await db.commit()
     await db.refresh(ticket)
     return ticket
+
+
+@router.delete("/{ticket_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_ticket(ticket_id: int, db: AsyncSession = Depends(get_db)):
+    """Delete a maintenance ticket."""
+    ticket = await db.get(MaintenanceTicket, ticket_id)
+    if not ticket:
+        raise HTTPException(status_code=404, detail="Maintenance ticket not found.")
+    await db.delete(ticket)
+    await db.commit()

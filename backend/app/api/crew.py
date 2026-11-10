@@ -49,3 +49,13 @@ async def add_certification(payload: CrewCertCreate, db: AsyncSession = Depends(
     await db.commit()
     await db.refresh(cert)
     return cert
+
+
+@router.delete("/{crew_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_crew(crew_id: int, db: AsyncSession = Depends(get_db)):
+    """Remove a crew member from the roster."""
+    crew = await db.get(CrewMember, crew_id)
+    if not crew:
+        raise HTTPException(status_code=404, detail="Crew member not found.")
+    await db.delete(crew)
+    await db.commit()

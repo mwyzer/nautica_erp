@@ -50,3 +50,13 @@ async def log_bunker(payload: BunkerLogCreate, db: AsyncSession = Depends(get_db
     await db.commit()
     await db.refresh(log_entry)
     return log_entry
+
+
+@router.delete("/{log_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_bunker_log(log_id: int, db: AsyncSession = Depends(get_db)):
+    """Delete a bunker fuel log entry."""
+    log_entry = await db.get(BunkerLog, log_id)
+    if not log_entry:
+        raise HTTPException(status_code=404, detail="Bunker log not found.")
+    await db.delete(log_entry)
+    await db.commit()

@@ -59,3 +59,13 @@ async def update_voyage(voyage_id: int, payload: VoyageUpdate, db: AsyncSession 
     await db.commit()
     await db.refresh(voyage)
     return voyage
+
+
+@router.delete("/{voyage_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_voyage(voyage_id: int, db: AsyncSession = Depends(get_db)):
+    """Cancel and delete a scheduled voyage."""
+    voyage = await db.get(Voyage, voyage_id)
+    if not voyage:
+        raise HTTPException(status_code=404, detail="Voyage not found.")
+    await db.delete(voyage)
+    await db.commit()

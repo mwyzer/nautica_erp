@@ -57,3 +57,13 @@ async def update_vessel(vessel_id: int, payload: VesselUpdate, db: AsyncSession 
     await db.commit()
     await db.refresh(vessel)
     return vessel
+
+
+@router.delete("/{vessel_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_vessel(vessel_id: int, db: AsyncSession = Depends(get_db)):
+    """Remove a vessel from the ERP fleet."""
+    vessel = await db.get(Vessel, vessel_id)
+    if not vessel:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Vessel not found.")
+    await db.delete(vessel)
+    await db.commit()
