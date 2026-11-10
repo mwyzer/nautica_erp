@@ -679,3 +679,33 @@ tr:hover td {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   justify-content: flex-end;
 }
+
+/* AIS Maritime Map & Radar Pulse */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.ais-vessel-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.nautical-map-tooltip {
+  background: rgba(13, 24, 53, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid var(--accent-cyan) !important;
+  border-radius: 6px !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+}
+
+.nautical-map-tooltip::before {
+  border-top-color: var(--accent-cyan) !important;
+}

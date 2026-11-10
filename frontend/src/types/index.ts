@@ -7,7 +7,49 @@ export type ERPModule =
   | 'finance'
   | 'voyage'
   | 'documents'
+  | 'ais'
   | 'copilot';
+
+export interface AISWeather {
+  sea_state: string;
+  wave_height_m: number;
+  wind_knots: number;
+  wind_dir: string;
+  air_temp_c: number;
+  barometer_hpa: number;
+}
+
+export interface AISVesselData {
+  vessel_id: number;
+  imo_number: string;
+  mmsi: string;
+  call_sign: string;
+  name: string;
+  vessel_type: string;
+  flag: string;
+  lat: number;
+  lng: number;
+  heading: number;
+  sog_knots: number;
+  cog_degrees: number;
+  nav_status: string;
+  destination_port: string;
+  eta: string;
+  departure_port: string;
+  cargo: string;
+  draft_meters: number;
+  main_engine_rpm: number;
+  fuel_burn_mt_day: number;
+  weather: AISWeather;
+}
+
+export interface SeaLane {
+  id: string;
+  name: string;
+  coordinates: [number, number][];
+  type: string;
+  color: string;
+}
 
 export interface Vessel {
   id: number;

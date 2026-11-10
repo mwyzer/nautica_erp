@@ -9,6 +9,7 @@ import InventorySection from './components/InventorySection';
 import ProcurementSection from './components/ProcurementSection';
 import FinanceSection from './components/FinanceSection';
 import DocumentSection from './components/DocumentSection';
+import AISMapSection from './components/AISMapSection';
 import AICopilotSection from './components/AICopilotSection';
 import ClearanceAuditModal from './components/ClearanceAuditModal';
 import {
@@ -124,6 +125,11 @@ export default function App(): React.JSX.Element {
         return {
           title: 'Document Management',
           desc: 'Sertifikat statutory kapal, dokumen STCW awak kapal, dan izin operasional (SIB/SPB)',
+        };
+      case 'ais':
+        return {
+          title: 'AIS Live Fleet Map & Maritime GIS',
+          desc: 'Radar pemantauan armada kapal, koridor ALKI, dan telemetri satelit AIS real-time',
         };
       case 'copilot':
         return {
@@ -263,6 +269,10 @@ export default function App(): React.JSX.Element {
 
           {activeModule === 'documents' && (
             <DocumentSection vessels={vessels} />
+          )}
+
+          {activeModule === 'ais' && (
+            <AISMapSection />
           )}
 
           {activeModule === 'copilot' && (
