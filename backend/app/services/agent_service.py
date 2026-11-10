@@ -236,18 +236,20 @@ Respond strictly in valid JSON format with two keys:
                 res = await db.execute(select(BunkerLog).order_by(BunkerLog.recorded_at.desc()).limit(10))
                 logs = res.scalars().all()
                 anomalies = [l for l in logs if l.anomaly_flag]
-                data = [
-                    {
+                data = []
+                for l in logs:
+                    v = await db.get(Vessel, l.vessel_id)
+                    v_name = v.name if v else f"Vessel #{l.vessel_id}"
+                    data.append({
                         "vessel_id": l.vessel_id,
+                        "vessel_name": v_name,
                         "fuel_type": l.fuel_type,
                         "current_rob_mt": l.current_rob_mt,
                         "daily_consumption_mt": l.daily_consumption_mt,
                         "anomaly_flag": l.anomaly_flag,
                         "reason": l.anomaly_reason
-                    }
-                    for l in logs
-                ]
-                reply = f"Pemeriksaan bunker selesai. Ditemukan {len(anomalies)} anomali konsumsi bahan bakar yang memerlukan investigasi superintendent."
+                    })
+                reply = f"Pemeriksaan radar bunker selesai. Ditemukan {len(anomalies)} anomali konsumsi bahan bakar yang memerlukan investigasi superintendent."
                 return {
                     "query": user_message,
                     "reply": reply,
