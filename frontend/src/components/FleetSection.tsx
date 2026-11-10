@@ -70,7 +70,7 @@ export default function FleetSection({ vessels, onRefresh }: FleetSectionProps):
           style={{ padding: '0.65rem 1.25rem', fontSize: '0.95rem' }}
           onClick={handleOpenAdd}
         >
-          <Plus size={18} /> + Tambah Kapal Baru
+          <Plus size={18} /> Tambah Kapal Baru
         </button>
       </div>
 

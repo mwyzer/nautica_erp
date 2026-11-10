@@ -70,7 +70,7 @@ export default function VoyagesSection({
             style={{ padding: '0.65rem 1.25rem', fontSize: '0.95rem' }}
             onClick={() => setIsModalOpen(true)}
           >
-            <Plus size={18} /> + Jadwalkan Pelayaran Baru
+            <Plus size={18} /> Jadwalkan Pelayaran Baru
           </button>
         </div>
       </div>
