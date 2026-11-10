@@ -19,7 +19,8 @@ import {
   Waves,
   FileCheck,
   CreditCard,
-  Bell
+  Bell,
+  Scale
 } from 'lucide-react';
 import { ERPModule } from '../types';
 
@@ -164,6 +165,14 @@ export default function Sidebar({
           icon: <Leaf size={18} />,
           badge: 'IMO 2030',
           badgeColor: '#10b981',
+        },
+        {
+          id: 'ballast_stability' as ERPModule,
+          label: 'Ballast & Ship Stability',
+          desc: 'Stabilitas lambung & IMO D-2',
+          icon: <Scale size={18} />,
+          badge: 'IMO D-2',
+          badgeColor: '#06b6d4',
         },
         {
           id: 'hseq' as ERPModule,

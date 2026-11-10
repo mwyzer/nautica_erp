@@ -18,6 +18,7 @@ export type ERPModule =
   | 'cargo_stowage'
   | 'crew_payroll'
   | 'emergency_alarms'
+  | 'ballast_stability'
   | 'copilot';
 
 // --- AI Weather Routing & Eco Speed Types ---
@@ -436,4 +437,53 @@ export interface ChatMessage {
   sender: 'user' | 'ai';
   text: string;
   toolExecuted?: string;
+}
+
+// --- Ballast Water Management & Ship Stability (IMO D-2) Types ---
+export interface BallastTank {
+  tank_id: string;
+  tank_name: string;
+  capacity_mt: number;
+  current_mt: number;
+  lcg_m: number;
+  tcg_m: number;
+  vcg_m: number;
+}
+
+export interface StabilityCalculationResult {
+  vessel_id: number;
+  total_displacement_mt: number;
+  gm_solid_m: number;
+  gm_fluid_m: number;
+  is_gm_compliant: boolean;
+  gm_status: string;
+  trim_m: number;
+  trim_direction: 'BY_STERN' | 'BY_BOW' | 'EVEN_KEEL';
+  is_trim_safe: boolean;
+  list_deg: number;
+  list_direction: 'STARBOARD' | 'PORT' | 'UPRIGHT';
+  is_list_safe: boolean;
+  bending_moment_percent: number;
+  shear_force_percent: number;
+  stress_status: 'SAFE' | 'HIGH_STRESS' | 'STRUCTURAL_OVERLOAD';
+  imo_compliance: boolean;
+  recommendations: string[];
+}
+
+export interface BallastExchangeLog {
+  id: number;
+  vessel_name: string;
+  log_date: string;
+  exchange_method: string;
+  tank_operated: string;
+  volume_pumped_m3: number;
+  start_lat: number;
+  start_lng: number;
+  distance_offshore_nm: number;
+  water_depth_m: number;
+  bwms_active: boolean;
+  tro_residual_ppm: number;
+  uv_reactor_power_kw: number;
+  compliance_standard: string;
+  port_inspector_status: string;
 }

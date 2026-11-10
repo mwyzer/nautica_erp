@@ -32,6 +32,7 @@ describe('Sidebar Component', () => {
     expect(screen.getByText('Chartering & Demurrage')).toBeInTheDocument();
     expect(screen.getByText('Crew Payroll (MLC 2006)')).toBeInTheDocument();
     expect(screen.getByText('IMO CII Decarbonization')).toBeInTheDocument();
+    expect(screen.getByText('Ballast & Ship Stability')).toBeInTheDocument();
     expect(screen.getByText('Emergency Alarms')).toBeInTheDocument();
   });
 

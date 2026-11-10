@@ -20,6 +20,7 @@ import DigitalSPBSection from './components/DigitalSPBSection';
 import CargoStowageSection from './components/CargoStowageSection';
 import CrewPayrollSection from './components/CrewPayrollSection';
 import EmergencyAlarmSection from './components/EmergencyAlarmSection';
+import BallastStabilitySection from './components/BallastStabilitySection';
 import AICopilotSection from './components/AICopilotSection';
 import ClearanceAuditModal from './components/ClearanceAuditModal';
 import {
@@ -190,6 +191,11 @@ export default function App(): React.JSX.Element {
         return {
           title: 'Maritime Emergency Alarm Center',
           desc: 'Pusat peringatan darurat maritim: krisis kekurangan BBM, kebocoran kemudi SOLAS & badai',
+        };
+      case 'ballast_stability':
+        return {
+          title: 'Ballast Water Management & Ship Stability Simulator (IMO D-2)',
+          desc: 'Kalkulator stabilitas utuh (GM, Trim, List, Bending Moment) & logbook pertukaran air balas internasional',
         };
       case 'copilot':
         return {
@@ -414,6 +420,10 @@ export default function App(): React.JSX.Element {
 
           {activeModule === 'emergency_alarms' && (
             <EmergencyAlarmSection />
+          )}
+
+          {activeModule === 'ballast_stability' && (
+            <BallastStabilitySection vessels={vessels} />
           )}
 
           {activeModule === 'copilot' && (
