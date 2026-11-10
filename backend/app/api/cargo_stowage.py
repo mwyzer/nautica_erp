@@ -61,7 +61,7 @@ BAY_SLOTS: List[Dict[str, Any]] = [
     {
         "bay_id": "Bay 04",
         "row": 1,
-        "tier": 02,
+        "tier": 2,
         "container_number": "TGHU-332110-9",
         "size_teu": 20,
         "weight_mt": 22.0,
@@ -72,7 +72,7 @@ BAY_SLOTS: List[Dict[str, Any]] = [
     {
         "bay_id": "Bay 04",
         "row": 2,
-        "tier": 02,
+        "tier": 2,
         "container_number": "ONEU-887412-3",
         "size_teu": 40,
         "weight_mt": 30.5,
@@ -83,7 +83,7 @@ BAY_SLOTS: List[Dict[str, Any]] = [
     {
         "bay_id": "Bay 04",
         "row": 3,
-        "tier": 02,
+        "tier": 2,
         "container_number": "TEMU-554109-1",
         "size_teu": 40,
         "weight_mt": 27.8,
@@ -95,7 +95,7 @@ BAY_SLOTS: List[Dict[str, Any]] = [
     {
         "bay_id": "Bay 04",
         "row": 4,
-        "tier": 02,
+        "tier": 2,
         "container_number": "EGLU-221094-5",
         "size_teu": 20,
         "weight_mt": 19.4,

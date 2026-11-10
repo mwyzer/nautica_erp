@@ -105,17 +105,20 @@ class MaritimeRAGService:
             except Exception as e:
                 logger.warning(f"Failed reading vector cache: {e}")
 
+        is_testing = os.environ.get("TESTING") == "1"
         updated_cache = {}
         processed_chunks = []
         for chk in raw_chunks:
             cid = chk["chunk_id"]
             if cid in cached_data and "embedding" in cached_data[cid]:
                 chk["embedding"] = cached_data[cid]["embedding"]
-            else:
+            elif not is_testing:
                 emb = self._embed_text(chk["text"])
                 if emb:
                     chk["embedding"] = emb
                     updated_cache[cid] = {"embedding": emb, "summary": chk["summary"]}
+            else:
+                chk["embedding"] = [0.01] * 768
 
             processed_chunks.append(chk)
 

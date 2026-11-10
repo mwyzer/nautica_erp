@@ -12,16 +12,18 @@ from app.services.scheduler import automation_scheduler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Auto-initialize database tables on startup
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    
-    # Start autonomous background automation watcher
-    await automation_scheduler.start()
+    is_testing = os.environ.get("TESTING") == "1"
+    if not is_testing:
+        # Auto-initialize database tables on startup
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        # Start autonomous background automation watcher
+        await automation_scheduler.start()
     yield
-    # Cleanup on shutdown
-    await automation_scheduler.stop()
-    await engine.dispose()
+    if not is_testing:
+        # Cleanup on shutdown
+        await automation_scheduler.stop()
+        await engine.dispose()
 
 
 app = FastAPI(

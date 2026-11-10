@@ -29,6 +29,7 @@ export interface WeatherRoutingScenario {
   fuel_saved_mt: number;
   cost_saved_usd: number;
   co2_avoided_mt: number;
+  extra_hours_at_sea?: number;
   eta: string;
   is_within_laycan: boolean;
   max_wave_height_m: number;
