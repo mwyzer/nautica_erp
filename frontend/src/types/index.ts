@@ -8,7 +8,121 @@ export type ERPModule =
   | 'voyage'
   | 'documents'
   | 'ais'
+  | 'cii'
+  | 'chartering'
+  | 'noon_report'
+  | 'hseq'
+  | 'drydock'
   | 'copilot';
+
+// --- IMO CII & Decarbonization Types ---
+export interface CIIRatingData {
+  vessel_id: number;
+  vessel_name: string;
+  vessel_type: string;
+  dwt: number;
+  total_distance_nm: number;
+  total_vlsfo_mt: number;
+  total_mgo_mt: number;
+  total_co2_emissions_mt: number;
+  attained_cii: number; // g CO2 / DWT.NM
+  required_cii: number;
+  cii_ratio: number;
+  rating_band: 'A' | 'B' | 'C' | 'D' | 'E';
+  seemp_plan_required: boolean;
+  eu_ets_allowance_eur: number;
+}
+
+// --- Chartering & Demurrage / Laytime Types ---
+export interface CharterpartyContract {
+  id: number;
+  contract_number: string;
+  charterer_name: string;
+  contract_type: 'TIME_CHARTER' | 'VOYAGE_CHARTER' | 'BAREBOAT';
+  vessel_name: string;
+  cargo_description: string;
+  rate_amount_usd: number; // per day or per MT
+  allowed_laytime_hours: number;
+  demurrage_rate_per_day_usd: number;
+  despatch_rate_per_day_usd: number;
+  laycan_start: string;
+  laycan_end: string;
+  status: 'NEGOTIATION' | 'FIXED_ACTIVE' | 'COMPLETED';
+}
+
+export interface LaytimeCalculation {
+  contract_id: number;
+  port_name: string;
+  laytime_allowed_hours: number;
+  actual_laytime_used_hours: number;
+  time_difference_hours: number;
+  result_type: 'DEMURRAGE' | 'DESPATCH' | 'ON_TIME';
+  settlement_amount_usd: number;
+}
+
+// --- Daily Noon Report & Vessel Telemetry Types ---
+export interface NoonReportSubmission {
+  id: number;
+  vessel_name: string;
+  report_date: string;
+  report_time_utc: string;
+  latitude: number;
+  longitude: number;
+  distance_last_24h_nm: number;
+  avg_speed_knots: number;
+  engine_rpm: number;
+  propeller_slip_pct: number;
+  fuel_burn_24h_mt: number;
+  fuel_rob_vlsfo_mt: number;
+  fuel_rob_mgo_mt: number;
+  fresh_water_rob_mt: number;
+  weather_beaufort: number;
+  sea_state: string;
+  hull_fouling_index: 'CLEAN' | 'SLIGHT_GROWTH' | 'MODERATE_FOULING' | 'CRITICAL_CLEANING_REQUIRED';
+}
+
+// --- HSEQ & Safety Inspection Types ---
+export interface HSEQIncident {
+  id: number;
+  incident_number: string;
+  vessel_name: string;
+  severity: 'NEAR_MISS' | 'MINOR' | 'SERIOUS' | 'CRITICAL';
+  category: 'NAVIGATION' | 'OCCUPATIONAL_SAFETY' | 'POLLUTION_PREVENTION' | 'CARGO_DAMAGE';
+  description: string;
+  date_occurred: string;
+  corrective_action: string;
+  status: 'INVESTIGATING' | 'ACTION_TAKEN' | 'CLOSED';
+}
+
+export interface PSCInspectionChecklist {
+  id: number;
+  mou_regime: 'TOKYO_MOU' | 'PARIS_MOU' | 'USCG' | 'DITJEN_HUBLA';
+  vessel_name: string;
+  target_port: string;
+  inspection_date: string;
+  detention_risk_level: 'LOW_RISK' | 'MEDIUM_RISK' | 'HIGH_RISK';
+  deficiencies_found: number;
+  solas_ready: boolean;
+  marpol_ready: boolean;
+  stcw_ready: boolean;
+  mlc_2006_ready: boolean;
+}
+
+// --- Drydocking & Shipyard Project Types ---
+export interface DrydockProject {
+  id: number;
+  project_code: string;
+  vessel_name: string;
+  survey_type: 'SPECIAL_SURVEY_5YR' | 'INTERMEDIATE_SURVEY' | 'EMERGENCY_REPAIR';
+  classification_society: string;
+  planned_start: string;
+  planned_duration_days: number;
+  budget_estimate_usd: number;
+  actual_spent_usd: number;
+  selected_shipyard: string;
+  status: 'PLANNING_SPECS' | 'TENDERING' | 'IN_DOCK' | 'COMPLETED_DELIVERED';
+  key_jobs: string[];
+}
 
 export interface AISWeather {
   sea_state: string;

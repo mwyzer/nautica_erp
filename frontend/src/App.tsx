@@ -10,6 +10,11 @@ import ProcurementSection from './components/ProcurementSection';
 import FinanceSection from './components/FinanceSection';
 import DocumentSection from './components/DocumentSection';
 import AISMapSection from './components/AISMapSection';
+import CIIDecarbSection from './components/CIIDecarbSection';
+import CharteringSection from './components/CharteringSection';
+import NoonReportSection from './components/NoonReportSection';
+import HSEQSection from './components/HSEQSection';
+import DrydockSection from './components/DrydockSection';
 import AICopilotSection from './components/AICopilotSection';
 import ClearanceAuditModal from './components/ClearanceAuditModal';
 import {
@@ -130,6 +135,31 @@ export default function App(): React.JSX.Element {
         return {
           title: 'AIS Live Fleet Map & Maritime GIS',
           desc: 'Radar pemantauan armada kapal, koridor ALKI, dan telemetri satelit AIS real-time',
+        };
+      case 'cii':
+        return {
+          title: 'IMO Decarbonization & CII Rating',
+          desc: 'Pengawasan emisi MARPOL Annex VI, Carbon Intensity Indicator Rating A-E & EU ETS',
+        };
+      case 'chartering':
+        return {
+          title: 'Commercial Chartering & Demurrage',
+          desc: 'Manajemen kontrak sewa kapal (CP) & kalkulator perhitungan laytime demurrage/despatch',
+        };
+      case 'noon_report':
+        return {
+          title: 'Daily Noon Report & Telemetry',
+          desc: 'Laporan tengah hari 24 jam Chief Engineer & pemantauan degradasi biofouling lambung',
+        };
+      case 'hseq':
+        return {
+          title: 'HSEQ Safety & Port State Control (PSC)',
+          desc: 'Manajemen keselamatan ISM Code, investigasi insiden near-miss & kesiapan inspeksi PSC',
+        };
+      case 'drydock':
+        return {
+          title: 'Drydocking & Shipyard Projects',
+          desc: 'Perencanaan dok 5 tahunan (Special Survey), spesifikasi teknis & perbandingan tender galangan',
         };
       case 'copilot':
         return {
@@ -273,6 +303,26 @@ export default function App(): React.JSX.Element {
 
           {activeModule === 'ais' && (
             <AISMapSection />
+          )}
+
+          {activeModule === 'cii' && (
+            <CIIDecarbSection />
+          )}
+
+          {activeModule === 'chartering' && (
+            <CharteringSection />
+          )}
+
+          {activeModule === 'noon_report' && (
+            <NoonReportSection vessels={vessels} />
+          )}
+
+          {activeModule === 'hseq' && (
+            <HSEQSection />
+          )}
+
+          {activeModule === 'drydock' && (
+            <DrydockSection />
           )}
 
           {activeModule === 'copilot' && (

@@ -10,7 +10,12 @@ import {
   FileText,
   Bot,
   Layers,
-  ChevronRight
+  ChevronRight,
+  Leaf,
+  Clock,
+  Anchor,
+  FileSpreadsheet,
+  ShieldAlert
 } from 'lucide-react';
 import { ERPModule } from '../types';
 
@@ -40,12 +45,6 @@ export default function Sidebar({
           icon: <Ship size={18} />,
         },
         {
-          id: 'crew' as ERPModule,
-          label: 'Crew Management',
-          desc: 'Data kru, jadwal & STCW',
-          icon: <Users size={18} />,
-        },
-        {
           id: 'ais' as ERPModule,
           label: 'AIS Live Fleet Map',
           desc: 'Radar maritim GIS & ALKI',
@@ -61,26 +60,28 @@ export default function Sidebar({
           badge: pendingClearanceCount > 0 ? `${pendingClearanceCount} Audit` : undefined,
           badgeColor: 'var(--warning)',
         },
+        {
+          id: 'crew' as ERPModule,
+          label: 'Crew Management',
+          desc: 'Data kru, jadwal & STCW',
+          icon: <Users size={18} />,
+        },
       ],
     },
     {
-      group: 'TEKNIK & LOGISTIK',
+      group: 'KOMERSIAL & KEUANGAN',
       items: [
         {
-          id: 'maintenance' as ERPModule,
-          label: 'Maintenance Management',
-          desc: 'Jadwal PMS & perbaikan kapal',
-          icon: <Wrench size={18} />,
-          badge: criticalDefectsCount > 0 ? `${criticalDefectsCount} Cacat` : undefined,
-          badgeColor: 'var(--danger)',
+          id: 'chartering' as ERPModule,
+          label: 'Chartering & Demurrage',
+          desc: 'Kontrak sewa kapal & laytime',
+          icon: <FileSpreadsheet size={18} />,
         },
         {
-          id: 'inventory' as ERPModule,
-          label: 'Inventory Management',
-          desc: 'Spare parts, BBM & persediaan',
-          icon: <Boxes size={18} />,
-          badge: anomalyCount > 0 ? `${anomalyCount} Anomali` : undefined,
-          badgeColor: 'var(--warning)',
+          id: 'finance' as ERPModule,
+          label: 'Finance & Accounting',
+          desc: 'Biaya operasional (OPEX) & P&L',
+          icon: <DollarSign size={18} />,
         },
         {
           id: 'procurement' as ERPModule,
@@ -91,13 +92,54 @@ export default function Sidebar({
       ],
     },
     {
-      group: 'KEUANGAN & DOKUMEN',
+      group: 'TEKNIK & PERAWATAN',
       items: [
         {
-          id: 'finance' as ERPModule,
-          label: 'Finance & Accounting',
-          desc: 'Biaya operasional (OPEX)',
-          icon: <DollarSign size={18} />,
+          id: 'maintenance' as ERPModule,
+          label: 'Maintenance (PMS)',
+          desc: 'Jadwal PMS & perbaikan kapal',
+          icon: <Wrench size={18} />,
+          badge: criticalDefectsCount > 0 ? `${criticalDefectsCount} Cacat` : undefined,
+          badgeColor: 'var(--danger)',
+        },
+        {
+          id: 'noon_report' as ERPModule,
+          label: 'Daily Noon Report',
+          desc: 'Telemetri 24h & biofouling',
+          icon: <Clock size={18} />,
+        },
+        {
+          id: 'drydock' as ERPModule,
+          label: 'Drydocking & Shipyard',
+          desc: 'Survei dok 5 tahunan & tender',
+          icon: <Anchor size={18} />,
+        },
+        {
+          id: 'inventory' as ERPModule,
+          label: 'Inventory Management',
+          desc: 'Spare parts, BBM & persediaan',
+          icon: <Boxes size={18} />,
+          badge: anomalyCount > 0 ? `${anomalyCount} Anomali` : undefined,
+          badgeColor: 'var(--warning)',
+        },
+      ],
+    },
+    {
+      group: 'HSEQ & LINGKUNGAN',
+      items: [
+        {
+          id: 'cii' as ERPModule,
+          label: 'IMO CII Decarbonization',
+          desc: 'Rating emisi A-E & EU ETS',
+          icon: <Leaf size={18} />,
+          badge: 'IMO 2030',
+          badgeColor: '#10b981',
+        },
+        {
+          id: 'hseq' as ERPModule,
+          label: 'HSEQ Safety & PSC',
+          desc: 'Investigasi insiden & vetting',
+          icon: <ShieldAlert size={18} />,
         },
         {
           id: 'documents' as ERPModule,

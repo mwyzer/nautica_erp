@@ -7,6 +7,11 @@ from app.api.maintenance import router as maintenance_router
 from app.api.agent import router as agent_router
 from app.api.rag import router as rag_router
 from app.api.ais import router as ais_router
+from app.api.decarbonization import router as cii_router
+from app.api.chartering import router as chartering_router
+from app.api.noon_reports import router as noon_reports_router
+from app.api.hseq import router as hseq_router
+from app.api.drydock import router as drydock_router
 
 api_router = APIRouter()
 
@@ -18,3 +23,8 @@ api_router.include_router(maintenance_router)
 api_router.include_router(agent_router)
 api_router.include_router(rag_router)
 api_router.include_router(ais_router)
+api_router.include_router(cii_router)
+api_router.include_router(chartering_router)
+api_router.include_router(noon_reports_router)
+api_router.include_router(hseq_router)
+api_router.include_router(drydock_router)
