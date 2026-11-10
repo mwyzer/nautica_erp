@@ -13,7 +13,99 @@ export type ERPModule =
   | 'noon_report'
   | 'hseq'
   | 'drydock'
+  | 'weather_routing'
+  | 'spb_generator'
+  | 'cargo_stowage'
+  | 'crew_payroll'
+  | 'emergency_alarms'
   | 'copilot';
+
+// --- AI Weather Routing & Eco Speed Types ---
+export interface WeatherRoutingScenario {
+  speed_knots: number;
+  duration_hours: number;
+  fuel_burn_total_mt: number;
+  bunker_cost_usd: number;
+  fuel_saved_mt: number;
+  cost_saved_usd: number;
+  co2_avoided_mt: number;
+  eta: string;
+  is_within_laycan: boolean;
+  max_wave_height_m: number;
+  route_description: string;
+  waypoints: { name: string; lat: number; lng: number; wind_beaufort: number }[];
+}
+
+// --- Digital SPB / Port Clearance & IMO FAL Forms Types ---
+export interface DigitalSPBRecord {
+  id: number;
+  spb_number: string;
+  vessel_name: string;
+  call_sign: string;
+  imo_number: string;
+  flag: string;
+  master_name: string;
+  origin_port_name: string;
+  destination_port_name: string;
+  issued_at: string;
+  valid_until: string;
+  syahbandar_authority: string;
+  qr_code_hash: string;
+  seaworthiness_status: 'LAIK_LAUT_APPROVED' | 'SUSPENDED';
+  fal_form_1_summary: string;
+  fal_form_2_cargo: string;
+  fal_form_3_stores: string;
+  fal_form_5_crew_count: number;
+}
+
+// --- Cargo Stowage & Container Bay Plan Types ---
+export interface ContainerBaySlot {
+  bay_id: string; // e.g. "Bay 04"
+  row: number;
+  tier: number;
+  container_number: string;
+  size_teu: 20 | 40;
+  weight_mt: number;
+  cargo_name: string;
+  is_reefer: boolean;
+  temperature_celsius?: number;
+  temp_setpoint_celsius?: number;
+  temp_status?: 'NORMAL' | 'WARNING_HIGH' | 'CRITICAL_ALARM';
+  imdg_class?: string; // e.g. "Class 3 (Flammable Liquid)"
+  slot_position: 'ON_DECK' | 'UNDER_DECK';
+}
+
+// --- Maritime Crew Payroll & Remittance Types ---
+export interface CrewPayrollRecord {
+  id: number;
+  crew_id: string;
+  seafarer_name: string;
+  rank: string;
+  assigned_vessel: string;
+  basic_salary_usd: number;
+  overtime_hours: number;
+  overtime_pay_usd: number;
+  leave_pay_usd: number;
+  family_allotment_usd: number; // Remittance sent home
+  family_recipient_name: string;
+  net_payable_usd: number;
+  payroll_month: string;
+  mlc_2006_compliant: boolean;
+  payment_status: 'PAID' | 'PROCESSING' | 'PENDING_APPROVAL';
+}
+
+// --- Maritime Emergency & Alarm Center Types ---
+export interface MaritimeAlarmItem {
+  id: number;
+  title: string;
+  description: string;
+  severity: 'CRITICAL' | 'WARNING' | 'INFO';
+  category: 'DISTRESS_SOS' | 'BUNKER_SHORTAGE' | 'STCW_BLOCKER' | 'TYPHOON_WEATHER' | 'MACHINERY_TRIP';
+  vessel_name: string;
+  timestamp: string;
+  acknowledged: boolean;
+  recommended_action: string;
+}
 
 // --- IMO CII & Decarbonization Types ---
 export interface CIIRatingData {

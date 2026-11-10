@@ -15,7 +15,11 @@ import {
   Clock,
   Anchor,
   FileSpreadsheet,
-  ShieldAlert
+  ShieldAlert,
+  Waves,
+  FileCheck,
+  CreditCard,
+  Bell
 } from 'lucide-react';
 import { ERPModule } from '../types';
 
@@ -61,6 +65,26 @@ export default function Sidebar({
           badgeColor: 'var(--warning)',
         },
         {
+          id: 'weather_routing' as ERPModule,
+          label: 'AI Weather Routing',
+          desc: 'Eco-speed & rute cuaca',
+          icon: <Waves size={18} />,
+          badge: 'ECO',
+          badgeColor: 'var(--accent-teal)',
+        },
+        {
+          id: 'spb_generator' as ERPModule,
+          label: 'Digital SPB & IMO FAL',
+          desc: 'Izin berlayar & sertifikat QR',
+          icon: <FileCheck size={18} />,
+        },
+        {
+          id: 'cargo_stowage' as ERPModule,
+          label: 'Cargo Bay Plan & IMDG',
+          desc: 'Slot kontainer & reefer',
+          icon: <Boxes size={18} />,
+        },
+        {
           id: 'crew' as ERPModule,
           label: 'Crew Management',
           desc: 'Data kru, jadwal & STCW',
@@ -76,6 +100,12 @@ export default function Sidebar({
           label: 'Chartering & Demurrage',
           desc: 'Kontrak sewa kapal & laytime',
           icon: <FileSpreadsheet size={18} />,
+        },
+        {
+          id: 'crew_payroll' as ERPModule,
+          label: 'Crew Payroll (MLC 2006)',
+          desc: 'Gaji pelaut & remitan darat',
+          icon: <CreditCard size={18} />,
         },
         {
           id: 'finance' as ERPModule,
@@ -146,6 +176,14 @@ export default function Sidebar({
           label: 'Document Management',
           desc: 'Sertifikat kapal & izin SIB',
           icon: <FileText size={18} />,
+        },
+        {
+          id: 'emergency_alarms' as ERPModule,
+          label: 'Emergency Alarms',
+          desc: 'Pusat darurat maritim & SOS',
+          icon: <Bell size={18} />,
+          badge: 'ALARM',
+          badgeColor: 'var(--danger)',
         },
         {
           id: 'copilot' as ERPModule,

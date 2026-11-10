@@ -15,6 +15,11 @@ import CharteringSection from './components/CharteringSection';
 import NoonReportSection from './components/NoonReportSection';
 import HSEQSection from './components/HSEQSection';
 import DrydockSection from './components/DrydockSection';
+import WeatherRoutingSection from './components/WeatherRoutingSection';
+import DigitalSPBSection from './components/DigitalSPBSection';
+import CargoStowageSection from './components/CargoStowageSection';
+import CrewPayrollSection from './components/CrewPayrollSection';
+import EmergencyAlarmSection from './components/EmergencyAlarmSection';
 import AICopilotSection from './components/AICopilotSection';
 import ClearanceAuditModal from './components/ClearanceAuditModal';
 import {
@@ -161,6 +166,31 @@ export default function App(): React.JSX.Element {
           title: 'Drydocking & Shipyard Projects',
           desc: 'Perencanaan dok 5 tahunan (Special Survey), spesifikasi teknis & perbandingan tender galangan',
         };
+      case 'weather_routing':
+        return {
+          title: 'AI Weather Routing & Eco Speed',
+          desc: 'Optimasi kecepatan jelajah baling-baling, penghematan BBM ribuan dolar & penghindaran gelombang badai',
+        };
+      case 'spb_generator':
+        return {
+          title: 'Digital SPB & IMO FAL Forms',
+          desc: 'Surat Persetujuan Berlayar resmi Syahbandar dengan stempel digital kelaiklautan & QR Code',
+        };
+      case 'cargo_stowage':
+        return {
+          title: 'Cargo Stowage & Container Bay Plan',
+          desc: 'Grid penataan kontainer 2D, pemantauan alarm temperatur reefer & segregasi IMDG Code',
+        };
+      case 'crew_payroll':
+        return {
+          title: 'Maritime Crew Payroll & Remittance',
+          desc: 'Penggajian awak kapal internasional berbasis MLC 2006 & transfer remitan keluarga di darat',
+        };
+      case 'emergency_alarms':
+        return {
+          title: 'Maritime Emergency Alarm Center',
+          desc: 'Pusat peringatan darurat maritim: krisis kekurangan BBM, kebocoran kemudi SOLAS & badai',
+        };
       case 'copilot':
         return {
           title: 'AI Maritime Superintendent (RAG)',
@@ -218,6 +248,47 @@ export default function App(): React.JSX.Element {
               <ShieldCheck size={14} color="var(--success)" />
               <span>Core Engine Port 8000</span>
             </div>
+
+            {/* Emergency Alarm Quick Bell */}
+            <button
+              onClick={() => setActiveModule('emergency_alarms')}
+              className="btn btn-outline"
+              style={{
+                position: 'relative',
+                padding: '8px',
+                height: '38px',
+                width: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: criticalDefects > 0 || bunkerAnomalies > 0 ? '1px solid var(--danger)' : '1px solid var(--border-color)',
+                color: criticalDefects > 0 || bunkerAnomalies > 0 ? 'var(--danger)' : '#cbd5e1',
+              }}
+              title="Pusat Peringatan Darurat Maritim"
+            >
+              <Bell size={18} />
+              {(criticalDefects > 0 || bunkerAnomalies > 0) && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: '-4px',
+                    right: '-4px',
+                    width: '18px',
+                    height: '18px',
+                    borderRadius: '50%',
+                    background: 'var(--danger)',
+                    color: '#fff',
+                    fontSize: '0.65rem',
+                    fontWeight: 800,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {criticalDefects + bunkerAnomalies}
+                </span>
+              )}
+            </button>
 
             <div
               style={{
@@ -323,6 +394,26 @@ export default function App(): React.JSX.Element {
 
           {activeModule === 'drydock' && (
             <DrydockSection />
+          )}
+
+          {activeModule === 'weather_routing' && (
+            <WeatherRoutingSection />
+          )}
+
+          {activeModule === 'spb_generator' && (
+            <DigitalSPBSection />
+          )}
+
+          {activeModule === 'cargo_stowage' && (
+            <CargoStowageSection />
+          )}
+
+          {activeModule === 'crew_payroll' && (
+            <CrewPayrollSection />
+          )}
+
+          {activeModule === 'emergency_alarms' && (
+            <EmergencyAlarmSection />
           )}
 
           {activeModule === 'copilot' && (

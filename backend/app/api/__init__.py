@@ -12,6 +12,11 @@ from app.api.chartering import router as chartering_router
 from app.api.noon_reports import router as noon_reports_router
 from app.api.hseq import router as hseq_router
 from app.api.drydock import router as drydock_router
+from app.api.weather_routing import router as weather_routing_router
+from app.api.spb import router as spb_router
+from app.api.cargo_stowage import router as stowage_router
+from app.api.payroll import router as payroll_router
+from app.api.alarms import router as alarms_router
 
 api_router = APIRouter()
 
@@ -28,3 +33,8 @@ api_router.include_router(chartering_router)
 api_router.include_router(noon_reports_router)
 api_router.include_router(hseq_router)
 api_router.include_router(drydock_router)
+api_router.include_router(weather_routing_router)
+api_router.include_router(spb_router)
+api_router.include_router(stowage_router)
+api_router.include_router(payroll_router)
+api_router.include_router(alarms_router)
