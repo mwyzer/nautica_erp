@@ -57,7 +57,7 @@ SEA_LANES = [
     },
 ]
 
-# Real-time AIS Vessel Telemetry State
+# Real-time AIS Vessel Telemetry State for Entire Fleet (7 Vessels)
 LIVE_VESSELS = [
     {
         "vessel_id": 1,
@@ -139,7 +139,7 @@ LIVE_VESSELS = [
         "cargo": "35,000 MT (Clean Petroleum Products)",
         "draft_meters": 9.5,
         "main_engine_rpm": 0,
-        "fuel_burn_mt_day": 3.2,  # Auxiliary boiler & genset only
+        "fuel_burn_mt_day": 3.2,
         "weather": {
             "sea_state": "Calm (Roadstead)",
             "wave_height_m": 0.3,
@@ -147,6 +147,126 @@ LIVE_VESSELS = [
             "wind_dir": "NE (045°)",
             "air_temp_c": 30.2,
             "barometer_hpa": 1010.8,
+        },
+    },
+    {
+        "vessel_id": 4,
+        "imo_number": "IMO9843210",
+        "mmsi": "525044129",
+        "call_sign": "YBF11",
+        "name": "MV Java Horizon",
+        "vessel_type": "CONTAINER",
+        "flag": "ID",
+        "lat": -6.40,
+        "lng": 116.20,  # Java Sea East heading to Makassar
+        "heading": 78,
+        "sog_knots": 16.2,
+        "cog_degrees": 76.5,
+        "nav_status": "Under way using engine",
+        "destination_port": "IDMAK (Makassar)",
+        "eta": "2026-11-11T20:00:00Z",
+        "departure_port": "IDSUB (Tanjung Perak)",
+        "cargo": "22,400 MT / 1,650 TEU",
+        "draft_meters": 11.8,
+        "main_engine_rpm": 96,
+        "fuel_burn_mt_day": 26.8,
+        "weather": {
+            "sea_state": "Moderate",
+            "wave_height_m": 1.4,
+            "wind_knots": 16,
+            "wind_dir": "E (085°)",
+            "air_temp_c": 28.8,
+            "barometer_hpa": 1010.5,
+        },
+    },
+    {
+        "vessel_id": 5,
+        "imo_number": "IMO9789012",
+        "mmsi": "525055318",
+        "call_sign": "YBG55",
+        "name": "MT Celebes Gas",
+        "vessel_type": "TANKER",
+        "flag": "ID",
+        "lat": -3.20,
+        "lng": 118.90,  # Makassar Strait (ALKI II) heading North
+        "heading": 15,
+        "sog_knots": 13.8,
+        "cog_degrees": 12.0,
+        "nav_status": "Under way using engine",
+        "destination_port": "IDBIT (Bitung)",
+        "eta": "2026-11-13T10:00:00Z",
+        "departure_port": "IDMAK (Makassar)",
+        "cargo": "14,200 MT (LPG Cryogenic Liquid)",
+        "draft_meters": 8.8,
+        "main_engine_rpm": 88,
+        "fuel_burn_mt_day": 20.5,
+        "weather": {
+            "sea_state": "Slight",
+            "wave_height_m": 0.9,
+            "wind_knots": 11,
+            "wind_dir": "SE (140°)",
+            "air_temp_c": 30.5,
+            "barometer_hpa": 1011.8,
+        },
+    },
+    {
+        "vessel_id": 6,
+        "imo_number": "IMO9621456",
+        "mmsi": "525066421",
+        "call_sign": "YBH66",
+        "name": "MV Borneo Express",
+        "vessel_type": "BULK_CARRIER",
+        "flag": "ID",
+        "lat": -2.10,
+        "lng": 108.80,  # Karimata Strait (ALKI I) Southbound
+        "heading": 188,
+        "sog_knots": 13.4,
+        "cog_degrees": 185.0,
+        "nav_status": "Under way using engine",
+        "destination_port": "IDCBN (Cirebon)",
+        "eta": "2026-11-12T16:00:00Z",
+        "departure_port": "IDPNK (Pontianak)",
+        "cargo": "58,000 MT (Bauxite Ore in Bulk)",
+        "draft_meters": 13.2,
+        "main_engine_rpm": 86,
+        "fuel_burn_mt_day": 30.2,
+        "weather": {
+            "sea_state": "Moderate",
+            "wave_height_m": 1.3,
+            "wind_knots": 15,
+            "wind_dir": "S (175°)",
+            "air_temp_c": 29.2,
+            "barometer_hpa": 1011.0,
+        },
+    },
+    {
+        "vessel_id": 7,
+        "imo_number": "IMO9512389",
+        "mmsi": "525077532",
+        "call_sign": "YBJ77",
+        "name": "TB Bima Perkasa 08",
+        "vessel_type": "TUG_BARGE",
+        "flag": "ID",
+        "lat": 1.15,
+        "lng": 103.95,  # Singapore Strait / Batam Anchorage
+        "heading": 280,
+        "sog_knots": 9.2,
+        "cog_degrees": 278.0,
+        "nav_status": "Under way using engine",
+        "destination_port": "MYTPP (Tanjung Pelepas)",
+        "eta": "2026-11-10T18:00:00Z",
+        "departure_port": "IDBTM (Batam)",
+        "cargo": "3,200 MT (Fabricated Steel Deck)",
+        "draft_meters": 4.5,
+        "main_engine_rpm": 120,
+        "fuel_burn_mt_day": 8.2,
+        "weather": {
+            "sea_state": "Smooth (Strait)",
+            "wave_height_m": 0.5,
+            "wind_knots": 7,
+            "wind_dir": "NE (050°)",
+            "air_temp_c": 31.2,
+            "barometer_hpa": 1011.5,
         },
     },
 ]
@@ -167,13 +287,24 @@ async def get_sea_lanes():
 @router.post("/simulate-tick")
 async def simulate_ais_movement():
     """Advances dynamic vessels along their navigational vectors for live demo simulation."""
-    # Move MV Nusantara Pioneer northwest slightly
-    LIVE_VESSELS[0]["lat"] = round(LIVE_VESSELS[0]["lat"] + 0.05, 4)
-    LIVE_VESSELS[0]["lng"] = round(LIVE_VESSELS[0]["lng"] - 0.03, 4)
+    # 1. Move MV Nusantara Pioneer northwest slightly
+    LIVE_VESSELS[0]["lat"] = round(LIVE_VESSELS[0]["lat"] + 0.04, 4)
+    LIVE_VESSELS[0]["lng"] = round(LIVE_VESSELS[0]["lng"] - 0.02, 4)
 
-    # Move MV Barito Leader south towards Madura Strait
-    LIVE_VESSELS[1]["lat"] = round(LIVE_VESSELS[1]["lat"] - 0.04, 4)
-    LIVE_VESSELS[1]["lng"] = round(LIVE_VESSELS[1]["lng"] - 0.02, 4)
+    # 2. Move MV Barito Leader south towards Madura Strait
+    LIVE_VESSELS[1]["lat"] = round(LIVE_VESSELS[1]["lat"] - 0.03, 4)
+    LIVE_VESSELS[1]["lng"] = round(LIVE_VESSELS[1]["lng"] - 0.015, 4)
+
+    # 4. Move MV Java Horizon east towards Makassar
+    LIVE_VESSELS[3]["lat"] = round(LIVE_VESSELS[3]["lat"] + 0.01, 4)
+    LIVE_VESSELS[3]["lng"] = round(LIVE_VESSELS[3]["lng"] + 0.035, 4)
+
+    # 5. Move MT Celebes Gas north along ALKI II
+    LIVE_VESSELS[4]["lat"] = round(LIVE_VESSELS[4]["lat"] + 0.04, 4)
+    LIVE_VESSELS[4]["lng"] = round(LIVE_VESSELS[4]["lng"] + 0.01, 4)
+
+    # 6. Move MV Borneo Express south along Karimata
+    LIVE_VESSELS[5]["lat"] = round(LIVE_VESSELS[5]["lat"] - 0.035, 4)
 
     return {
         "status": "success",
