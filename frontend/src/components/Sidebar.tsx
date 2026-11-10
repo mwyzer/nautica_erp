@@ -54,8 +54,6 @@ export default function Sidebar({
           label: 'AIS Live Fleet Map',
           desc: 'Radar maritim GIS & ALKI',
           icon: <Compass size={18} />,
-          badge: 'LIVE',
-          badgeColor: 'var(--accent-cyan)',
         },
         {
           id: 'voyage' as ERPModule,
@@ -70,8 +68,6 @@ export default function Sidebar({
           label: 'AI Weather Routing',
           desc: 'Eco-speed & rute cuaca',
           icon: <Waves size={18} />,
-          badge: 'ECO',
-          badgeColor: 'var(--accent-teal)',
         },
         {
           id: 'spb_generator' as ERPModule,
@@ -163,16 +159,12 @@ export default function Sidebar({
           label: 'IMO CII Decarbonization',
           desc: 'Rating emisi A-E & EU ETS',
           icon: <Leaf size={18} />,
-          badge: 'IMO 2030',
-          badgeColor: '#10b981',
         },
         {
           id: 'ballast_stability' as ERPModule,
           label: 'Ballast & Ship Stability',
           desc: 'Stabilitas lambung & IMO D-2',
           icon: <Scale size={18} />,
-          badge: 'IMO D-2',
-          badgeColor: '#06b6d4',
         },
         {
           id: 'hseq' as ERPModule,
@@ -191,13 +183,13 @@ export default function Sidebar({
           label: 'Emergency Alarms',
           desc: 'Pusat darurat maritim & SOS',
           icon: <Bell size={18} />,
-          badge: 'ALARM',
+          badge: criticalDefectsCount > 0 ? `${criticalDefectsCount} Cacat` : undefined,
           badgeColor: 'var(--danger)',
         },
         {
           id: 'copilot' as ERPModule,
-          label: 'AI Superintendent (RAG)',
-          desc: 'Co-Pilot SOLAS, STCW & MARPOL',
+          label: 'Maritime Regulatory Superintendent',
+          desc: 'Audit kepatuhan SOLAS, STCW & MARPOL',
           icon: <Bot size={18} />,
           highlight: true,
         },
@@ -265,7 +257,7 @@ export default function Sidebar({
             <div style={{
               fontSize: '0.68rem',
               fontWeight: 700,
-              color: '#64748b',
+              color: '#94a3b8',
               padding: '0 0.75rem 0.4rem',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
@@ -335,7 +327,7 @@ export default function Sidebar({
                         </div>
                         <div style={{
                           fontSize: '0.7rem',
-                          color: '#64748b',
+                          color: '#94a3b8',
                           whiteSpace: 'nowrap',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',

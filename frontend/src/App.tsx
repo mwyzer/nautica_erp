@@ -199,8 +199,8 @@ export default function App(): React.JSX.Element {
         };
       case 'copilot':
         return {
-          title: 'AI Maritime Superintendent (RAG)',
-          desc: 'Asisten AI regulasi maritim terverifikasi SOLAS, STCW, MARPOL & ISM Code',
+          title: 'Maritime Regulatory Superintendent',
+          desc: 'Audit kepatuhan regulasi IMO SOLAS, STCW, MARPOL & ISM Code',
         };
       default:
         return { title: 'Maritime ERP', desc: 'Sistem Operasional Kapal Terpadu' };

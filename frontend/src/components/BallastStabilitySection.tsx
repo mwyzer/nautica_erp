@@ -407,6 +407,11 @@ export default function BallastStabilitySection({ vessels }: BallastStabilitySec
               max={currentVessel ? currentVessel.dwt * 0.95 : 18000}
               step={250}
               value={cargoPayload}
+              aria-label="Muatan Kargo di Palka (Cargo Payload)"
+              aria-valuemin={0}
+              aria-valuemax={currentVessel ? currentVessel.dwt * 0.95 : 18000}
+              aria-valuenow={cargoPayload}
+              aria-valuetext={`${cargoPayload.toLocaleString()} Metrik Ton`}
               onChange={(e) => {
                 const val = Number(e.target.value);
                 setCargoPayload(val);
@@ -440,6 +445,11 @@ export default function BallastStabilitySection({ vessels }: BallastStabilitySec
                     max={tank.capacity_mt}
                     step={10}
                     value={tank.current_mt}
+                    aria-label={`Pengisian ${tank.tank_name}`}
+                    aria-valuemin={0}
+                    aria-valuemax={tank.capacity_mt}
+                    aria-valuenow={tank.current_mt}
+                    aria-valuetext={`${tank.current_mt} dari ${tank.capacity_mt} Metrik Ton`}
                     onChange={(e) => handleTankChange(tank.tank_id, Number(e.target.value))}
                     style={{ width: '100%', accentColor: '#06b6d4', cursor: 'pointer' }}
                   />

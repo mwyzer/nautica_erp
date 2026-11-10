@@ -18,14 +18,13 @@ export default function KpiGrid({ vessels, voyages, bunkerLogs }: KpiGridProps):
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    background: 'linear-gradient(145deg, rgba(20, 40, 80, 0.85), rgba(16, 31, 66, 0.95))',
-    border: '1px solid rgba(39, 73, 109, 0.8)',
-    borderRadius: '14px',
+    background: '#131e3b',
+    border: '1px solid #23385d',
+    borderRadius: '12px',
     padding: '1.25rem 1.4rem',
     minHeight: '145px',
-    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.3)',
-    backdropFilter: 'blur(8px)',
-    transition: 'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.25)',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
   };
 
   const headerStyle: React.CSSProperties = {
@@ -38,7 +37,7 @@ export default function KpiGrid({ vessels, voyages, bunkerLogs }: KpiGridProps):
   const titleStyle: React.CSSProperties = {
     fontSize: '0.82rem',
     fontWeight: 600,
-    color: '#94a3b8',
+    color: '#cbd5e1',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
   };
@@ -66,7 +65,7 @@ export default function KpiGrid({ vessels, voyages, bunkerLogs }: KpiGridProps):
 
   const subStyle: React.CSSProperties = {
     fontSize: '0.82rem',
-    color: '#94a3b8',
+    color: '#cbd5e1',
     lineHeight: 1.4,
   };
 
