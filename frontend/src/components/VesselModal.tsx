@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { X, Ship, Save } from 'lucide-react';
+import { Vessel } from '../types';
 
-export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) {
+interface VesselModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  vesselToEdit: Vessel | null;
+  onSaved: () => void | Promise<void>;
+}
+
+export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }: VesselModalProps): React.JSX.Element | null {
   const [formData, setFormData] = useState({
     name: '',
     imo_number: '',
@@ -14,7 +22,7 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
     fuel_burn_rate_mt_per_day: 22.0,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (vesselToEdit) {
@@ -47,21 +55,21 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
 
   if (!isOpen) return null;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
 
     try {
       const isEdit = Boolean(vesselToEdit?.id);
-      const url = isEdit ? `/api/v1/vessels/${vesselToEdit.id}` : '/api/v1/vessels';
+      const url = isEdit ? `/api/v1/vessels/${vesselToEdit?.id}` : '/api/v1/vessels';
       const method = isEdit ? 'PATCH' : 'POST';
 
       const payload = {
         ...formData,
-        dwt: parseFloat(formData.dwt),
-        avg_speed_knots: parseFloat(formData.avg_speed_knots),
-        fuel_burn_rate_mt_per_day: parseFloat(formData.fuel_burn_rate_mt_per_day),
+        dwt: parseFloat(String(formData.dwt)),
+        avg_speed_knots: parseFloat(String(formData.avg_speed_knots)),
+        fuel_burn_rate_mt_per_day: parseFloat(String(formData.fuel_burn_rate_mt_per_day)),
       };
 
       const res = await fetch(url, {
@@ -77,8 +85,8 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
 
       await onSaved();
       onClose();
-    } catch (err) {
-      setError(err.message);
+    } catch (err: any) {
+      setError(err.message || 'Terjadi kesalahan sistem.');
     } finally {
       setIsSubmitting(false);
     }
@@ -117,7 +125,7 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
               </div>
 
               <div className="form-group">
-                <label className="form-label">Nomor IMO (International Maritime Org)</label>
+                <label className="form-label">Nomor IMO</label>
                 <input
                   type="text"
                   required
@@ -169,12 +177,12 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
                   required
                   className="form-control"
                   value={formData.dwt}
-                  onChange={e => setFormData({ ...formData, dwt: e.target.value })}
+                  onChange={e => setFormData({ ...formData, dwt: Number(e.target.value) })}
                 />
               </div>
 
               <div className="form-group">
-                <label className="form-label">Pelabuhan Saat Ini (UN/LOCODE)</label>
+                <label className="form-label">Pelabuhan Terkini (UN/LOCODE)</label>
                 <input
                   type="text"
                   required
@@ -195,7 +203,7 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
                   required
                   className="form-control"
                   value={formData.avg_speed_knots}
-                  onChange={e => setFormData({ ...formData, avg_speed_knots: e.target.value })}
+                  onChange={e => setFormData({ ...formData, avg_speed_knots: Number(e.target.value) })}
                 />
               </div>
 
@@ -207,7 +215,7 @@ export default function VesselModal({ isOpen, onClose, vesselToEdit, onSaved }) 
                   required
                   className="form-control"
                   value={formData.fuel_burn_rate_mt_per_day}
-                  onChange={e => setFormData({ ...formData, fuel_burn_rate_mt_per_day: e.target.value })}
+                  onChange={e => setFormData({ ...formData, fuel_burn_rate_mt_per_day: Number(e.target.value) })}
                 />
               </div>
             </div>

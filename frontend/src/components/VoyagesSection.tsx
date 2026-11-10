@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import { Zap, RefreshCw, Plus, Trash2, Calendar } from 'lucide-react';
+import { Voyage, Vessel } from '../types';
 import VoyageModal from './VoyageModal';
 
-export default function VoyagesSection({ voyages, vessels, onAuditClick, onRefresh }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [deletingId, setDeletingId] = useState(null);
+interface VoyagesSectionProps {
+  voyages: Voyage[];
+  vessels: Vessel[];
+  onAuditClick: (voyageId: number) => void | Promise<void>;
+  onRefresh: () => void | Promise<void>;
+}
 
-  const handleDelete = async (voyage) => {
+export default function VoyagesSection({
+  voyages,
+  vessels,
+  onAuditClick,
+  onRefresh
+}: VoyagesSectionProps): React.JSX.Element {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+
+  const handleDelete = async (voyage: Voyage) => {
     if (!window.confirm(`Yakin ingin membatalkan/menghapus pelayaran ${voyage.voyage_number}?`)) {
       return;
     }
@@ -17,8 +30,8 @@ export default function VoyagesSection({ voyages, vessels, onAuditClick, onRefre
         const errJson = await res.json().catch(() => ({}));
         throw new Error(errJson.detail || 'Gagal menghapus pelayaran.');
       }
-      if (onRefresh) await onRefresh();
-    } catch (err) {
+      await onRefresh();
+    } catch (err: any) {
       alert(`Error: ${err.message}`);
     } finally {
       setDeletingId(null);
@@ -27,21 +40,37 @@ export default function VoyagesSection({ voyages, vessels, onAuditClick, onRefre
 
   return (
     <section>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+      {/* Header with prominent Action Button */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '1.5rem',
+        background: 'var(--bg-card)',
+        padding: '1.25rem 1.5rem',
+        borderRadius: '12px',
+        border: '1px solid var(--border-color)',
+        flexWrap: 'wrap',
+        gap: '1rem'
+      }}>
         <div>
-          <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Calendar size={20} color="var(--accent-cyan)" /> Rencana Pelayaran & AI Port Clearance
+          <h2 style={{ fontSize: '1.35rem', display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--text-main)' }}>
+            <Calendar size={24} color="var(--accent-cyan)" /> Rencana Pelayaran & AI Port Clearance
           </h2>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
             Jadwalkan rute baru atau jalankan audit kelaiklautan instan berbasis SOLAS, STCW, dan cadangan BBM.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
           <button className="btn btn-secondary" onClick={onRefresh}>
             <RefreshCw size={14} /> Segarkan
           </button>
-          <button className="btn btn-ai" onClick={() => setIsModalOpen(true)}>
-            <Plus size={15} /> Jadwalkan Pelayaran Baru
+          <button
+            className="btn btn-ai"
+            style={{ padding: '0.65rem 1.25rem', fontSize: '0.95rem' }}
+            onClick={() => setIsModalOpen(true)}
+          >
+            <Plus size={18} /> + Jadwalkan Pelayaran Baru
           </button>
         </div>
       </div>
@@ -61,7 +90,14 @@ export default function VoyagesSection({ voyages, vessels, onAuditClick, onRefre
           </thead>
           <tbody>
             {voyages.length === 0 ? (
-              <tr><td colSpan={7} style={{ textAlign: 'center' }}>Belum ada pelayaran aktif. Silakan jadwalkan pelayaran baru.</td></tr>
+              <tr>
+                <td colSpan={7} style={{ textAlign: 'center', padding: '3rem' }}>
+                  <p style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>Belum ada pelayaran aktif.</p>
+                  <button className="btn btn-ai" onClick={() => setIsModalOpen(true)}>
+                    <Plus size={15} /> + Buat Rencana Pelayaran Pertama
+                  </button>
+                </td>
+              </tr>
             ) : (
               voyages.map(voy => {
                 const badgeClass =

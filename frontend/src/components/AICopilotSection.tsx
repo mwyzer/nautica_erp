@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot } from 'lucide-react';
+import { ChatMessage } from '../types';
 
-export default function AICopilotSection() {
-  const [messages, setMessages] = useState([
+export default function AICopilotSection(): React.JSX.Element {
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
       sender: 'ai',
       text: 'Halo! Saya Captain Gemini, AI Superintendent untuk Nautical ERP. Saya terhubung langsung ke basis data armada, sertifikasi kru STCW, dan radar bunker BBM Anda. Ada yang bisa saya bantu periksa hari ini?',
@@ -10,7 +11,7 @@ export default function AICopilotSection() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -20,7 +21,7 @@ export default function AICopilotSection() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async (messageText) => {
+  const handleSend = async (messageText?: string) => {
     const query = messageText || input;
     if (!query.trim() || isLoading) return;
 
@@ -42,7 +43,7 @@ export default function AICopilotSection() {
 
       let reply = data.reply;
       if (data.data && Array.isArray(data.data) && data.data.length > 0) {
-        const formattedItems = data.data.map(item => {
+        const formattedItems = data.data.map((item: any) => {
           if (item.name && item.imo) {
             return `🚢 **${item.name}** (${item.imo}) — Status: \`${item.status}\` | Pelabuhan: ${item.port} | Burn: ${item.burn_rate_mt} MT/hari`;
           }
@@ -62,7 +63,7 @@ export default function AICopilotSection() {
         ...prev,
         { sender: 'ai', text: reply, toolExecuted: data.tool_executed },
       ]);
-    } catch (err) {
+    } catch (err: any) {
       setMessages(prev => [
         ...prev,
         { sender: 'ai', text: `Maaf, terjadi gangguan koneksi ke server: ${err.message}. Pastikan backend di port 8000 aktif.` },
@@ -74,9 +75,9 @@ export default function AICopilotSection() {
 
   return (
     <section>
-      <div style={{ marginBottom: '1rem' }}>
-        <h2 style={{ fontSize: '1.25rem' }}>Captain Gemini — Nautical Operations Co-Pilot</h2>
-        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+      <div style={{ marginBottom: '1.25rem' }}>
+        <h2 style={{ fontSize: '1.35rem' }}>Captain Gemini — Nautical Operations Co-Pilot</h2>
+        <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
           Tanyakan status kesiapan armada, verifikasi bunker, atau evaluasi kelaiklautan secara interaktif.
         </p>
       </div>

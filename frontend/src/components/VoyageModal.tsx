@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { X, Navigation, Save } from 'lucide-react';
+import { Vessel } from '../types';
 
-export default function VoyageModal({ isOpen, onClose, vessels, onSaved }) {
+interface VoyageModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  vessels: Vessel[];
+  onSaved: () => void | Promise<void>;
+}
+
+export default function VoyageModal({ isOpen, onClose, vessels, onSaved }: VoyageModalProps): React.JSX.Element | null {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const arrival = new Date();
@@ -19,11 +27,11 @@ export default function VoyageModal({ isOpen, onClose, vessels, onSaved }) {
     cargo_weight_mt: 15000,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
@@ -31,9 +39,9 @@ export default function VoyageModal({ isOpen, onClose, vessels, onSaved }) {
     try {
       const payload = {
         ...formData,
-        vessel_id: parseInt(formData.vessel_id, 10),
-        distance_nm: parseFloat(formData.distance_nm),
-        cargo_weight_mt: parseFloat(formData.cargo_weight_mt),
+        vessel_id: parseInt(String(formData.vessel_id), 10),
+        distance_nm: parseFloat(String(formData.distance_nm)),
+        cargo_weight_mt: parseFloat(String(formData.cargo_weight_mt)),
         departure_time: new Date(formData.departure_time).toISOString(),
         estimated_arrival: new Date(formData.estimated_arrival).toISOString(),
         status: 'PLANNED',
@@ -53,8 +61,8 @@ export default function VoyageModal({ isOpen, onClose, vessels, onSaved }) {
 
       await onSaved();
       onClose();
-    } catch (err) {
-      setError(err.message);
+    } catch (err: any) {
+      setError(err.message || 'Terjadi kesalahan sistem.');
     } finally {
       setIsSubmitting(false);
     }
@@ -97,7 +105,7 @@ export default function VoyageModal({ isOpen, onClose, vessels, onSaved }) {
                 <select
                   className="form-control"
                   value={formData.vessel_id}
-                  onChange={e => setFormData({ ...formData, vessel_id: e.target.value })}
+                  onChange={e => setFormData({ ...formData, vessel_id: Number(e.target.value) })}
                 >
                   {vessels.map(v => (
                     <option key={v.id} value={v.id}>
@@ -143,7 +151,7 @@ export default function VoyageModal({ isOpen, onClose, vessels, onSaved }) {
                   required
                   className="form-control"
                   value={formData.distance_nm}
-                  onChange={e => setFormData({ ...formData, distance_nm: e.target.value })}
+                  onChange={e => setFormData({ ...formData, distance_nm: Number(e.target.value) })}
                 />
               </div>
 
