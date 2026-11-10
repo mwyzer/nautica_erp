@@ -81,14 +81,14 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
             style={{
               padding: '0.5rem 0.85rem',
               borderRadius: '8px',
-              backgroundColor: '#131e3b',
-              border: '1px solid #23385d',
-              color: '#f8fafc',
+              backgroundColor: '#ffffff',
+              border: '1px solid var(--border-color)',
+              color: 'var(--text-main)',
               fontSize: '0.875rem',
             }}
           >
             {vessels.map((v) => (
-              <option key={v.id} value={v.id} style={{ background: '#1e293b' }}>
+              <option key={v.id} value={v.id}>
                 {v.name} ({v.vessel_type})
               </option>
             ))}
@@ -102,7 +102,7 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
               alignItems: 'center',
               gap: '0.4rem',
               padding: '0.5rem 0.9rem',
-              backgroundColor: '#ef4444',
+              backgroundColor: '#dc2626',
               color: '#ffffff',
               fontWeight: 600,
               borderRadius: '8px',
@@ -117,28 +117,28 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
       </div>
 
       {drillMessage && (
-        <div style={{ padding: '0.75rem 1rem', borderRadius: '8px', backgroundColor: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.3)', color: '#34d399', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div style={{ padding: '0.75rem 1rem', borderRadius: '8px', backgroundColor: '#dcfce7', border: '1px solid #bbf7d0', color: '#166534', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}>
           <CheckCircle2 size={16} /> {drillMessage}
         </div>
       )}
 
       {/* 2. Vessel BMP5 Hardening Status Card */}
       {readiness && (
-        <div style={{ padding: '1.25rem', backgroundColor: '#131e3b', borderRadius: '12px', border: '1px solid #23385d', marginBottom: '1.5rem' }}>
+        <div style={{ padding: '1.25rem', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid var(--border-color)', marginBottom: '1.5rem', boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-            <h3 style={{ fontSize: '1.05rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <ShieldCheck size={18} style={{ color: '#10b981' }} />
+            <h3 style={{ fontSize: '1.05rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)' }}>
+              <ShieldCheck size={18} style={{ color: '#059669' }} />
               Status Kesiapan Pertahanan Fisik BMP5: {readiness.vessel_name}
             </h3>
             <span
               style={{
                 padding: '0.25rem 0.65rem',
                 borderRadius: '6px',
-                backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                color: '#34d399',
+                backgroundColor: '#dcfce7',
+                color: '#166534',
                 fontSize: '0.8rem',
                 fontWeight: 600,
-                border: '1px solid rgba(16, 185, 129, 0.3)',
+                border: '1px solid #bbf7d0',
               }}
             >
               BMP5 Compliance: {readiness.bmp5_compliance_percent}%
@@ -146,37 +146,37 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.75rem' }}>
-            <div style={{ padding: '0.75rem', backgroundColor: '#0f172a', borderRadius: '8px' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Kawat Berduri (Razor Wire):</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: readiness.razor_wire_installed ? '#10b981' : '#ef4444', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+            <div style={{ padding: '0.75rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Kawat Berduri (Razor Wire):</span>
+              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: readiness.razor_wire_installed ? '#059669' : '#dc2626', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
                 <CheckCircle2 size={15} /> Terpasang di Lambung
               </div>
             </div>
 
-            <div style={{ padding: '0.75rem', backgroundColor: '#0f172a', borderRadius: '8px' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Water Cannons:</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: readiness.water_cannons_pressurized ? '#10b981' : '#ef4444', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+            <div style={{ padding: '0.75rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Water Cannons:</span>
+              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: readiness.water_cannons_pressurized ? '#059669' : '#dc2626', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
                 <CheckCircle2 size={15} /> Bertekanan Siap Pakai
               </div>
             </div>
 
-            <div style={{ padding: '0.75rem', backgroundColor: '#0f172a', borderRadius: '8px' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Citadel (Ruang Aman):</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+            <div style={{ padding: '0.75rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Citadel (Ruang Aman):</span>
+              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#0284c7', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
                 <Lock size={15} /> Terkunci ({readiness.citadel_days_provisions} Hari Logistik)
               </div>
             </div>
 
-            <div style={{ padding: '0.75rem', backgroundColor: '#0f172a', borderRadius: '8px' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Regu Bersenjata (PCASP):</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: readiness.armed_security_onboard ? '#34d399' : '#cbd5e1', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+            <div style={{ padding: '0.75rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Regu Bersenjata (PCASP):</span>
+              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: readiness.armed_security_onboard ? '#059669' : '#475569', display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
                 <Users size={15} /> {readiness.armed_security_onboard ? `${readiness.pcasp_guard_count} Personel PCASP` : 'Tanpa Pengawal'}
               </div>
             </div>
 
-            <div style={{ padding: '0.75rem', backgroundColor: '#0f172a', borderRadius: '8px' }}>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Latihan Terakhir:</span>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#f8fafc', marginTop: '0.2rem' }}>
+            <div style={{ padding: '0.75rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Latihan Terakhir:</span>
+              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-main)', marginTop: '0.2rem' }}>
                 {readiness.security_drill_last_date}
               </div>
             </div>
@@ -186,9 +186,9 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
 
       {/* 3. Global High Risk Areas (HRA) Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 1.2fr) minmax(320px, 1fr)', gap: '1.25rem', marginBottom: '1.5rem' }}>
-        <div style={{ padding: '1.25rem', backgroundColor: '#131e3b', borderRadius: '12px', border: '1px solid #23385d' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-            <Compass size={18} style={{ color: '#ef4444' }} /> Zona Risiko Tinggi Maritim Global (HRA Zones)
+        <div style={{ padding: '1.25rem', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid var(--border-color)', boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--text-main)' }}>
+            <Compass size={18} style={{ color: '#dc2626' }} /> Zona Risiko Tinggi Maritim Global (HRA Zones)
           </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -197,19 +197,20 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
                 key={zone.zone_id}
                 style={{
                   padding: '1rem',
-                  backgroundColor: '#0f172a',
+                  backgroundColor: '#f8fafc',
                   borderRadius: '8px',
-                  borderLeft: `4px solid ${zone.risk_level === 'CRITICAL' ? '#ef4444' : zone.risk_level === 'HIGH' ? '#f59e0b' : '#38bdf8'}`,
+                  border: '1px solid var(--border-color)',
+                  borderLeft: `4px solid ${zone.risk_level === 'CRITICAL' ? '#dc2626' : zone.risk_level === 'HIGH' ? '#d97706' : '#0284c7'}`,
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <span style={{ fontWeight: 700, color: '#f8fafc', fontSize: '0.9rem' }}>{zone.zone_name}</span>
+                  <span style={{ fontWeight: 700, color: 'var(--text-main)', fontSize: '0.9rem' }}>{zone.zone_name}</span>
                   <span
                     style={{
                       padding: '0.15rem 0.5rem',
                       borderRadius: '4px',
-                      backgroundColor: zone.risk_level === 'CRITICAL' ? 'rgba(239, 68, 68, 0.2)' : 'rgba(245, 158, 11, 0.2)',
-                      color: zone.risk_level === 'CRITICAL' ? '#f87171' : '#fbbf24',
+                      backgroundColor: zone.risk_level === 'CRITICAL' ? '#fee2e2' : '#fef3c7',
+                      color: zone.risk_level === 'CRITICAL' ? '#991b1b' : '#92400e',
                       fontSize: '0.7rem',
                       fontWeight: 700,
                     }}
@@ -217,7 +218,7 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
                     {zone.risk_level}
                   </span>
                 </div>
-                <p style={{ fontSize: '0.78rem', color: '#cbd5e1', lineHeight: '1.4', marginBottom: '0.5rem' }}>
+                <p style={{ fontSize: '0.78rem', color: '#334155', lineHeight: '1.4', marginBottom: '0.5rem' }}>
                   {zone.description}
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.725rem', color: 'var(--text-secondary)' }}>
@@ -230,9 +231,9 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
         </div>
 
         {/* Recent Piracy Incidents Feed */}
-        <div style={{ padding: '1.25rem', backgroundColor: '#131e3b', borderRadius: '12px', border: '1px solid #23385d' }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-            <Radio size={18} style={{ color: '#f59e0b' }} /> Feed Insiden Terkini IMB Piracy Reporting Centre
+        <div style={{ padding: '1.25rem', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid var(--border-color)', boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--text-main)' }}>
+            <Radio size={18} style={{ color: '#d97706' }} /> Feed Insiden Terkini IMB Piracy Reporting Centre
           </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -241,22 +242,22 @@ export default function PiracySecuritySection({ vessels }: PiracySecuritySection
                 key={inc.id}
                 style={{
                   padding: '0.85rem',
-                  backgroundColor: '#0f172a',
+                  backgroundColor: '#f8fafc',
                   borderRadius: '8px',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  border: '1px solid var(--border-color)',
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', marginBottom: '0.25rem' }}>
-                  <span style={{ color: '#38bdf8', fontWeight: 600 }}>{inc.location_name}</span>
-                  <span style={{ color: 'var(--text-secondary)' }}>{inc.incident_date}</span>
+                  <span style={{ color: '#0284c7', fontWeight: 600 }}>{inc.location_name}</span>
+                  <span style={{ color: 'var(--text-muted)' }}>{inc.incident_date}</span>
                 </div>
-                <div style={{ fontSize: '0.825rem', fontWeight: 600, color: '#f8fafc', marginBottom: '0.25rem' }}>
+                <div style={{ fontSize: '0.825rem', fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.25rem' }}>
                   {inc.attack_type} ({inc.vessel_type})
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#cbd5e1', marginBottom: '0.35rem' }}>
+                <div style={{ fontSize: '0.75rem', color: '#334155', marginBottom: '0.35rem' }}>
                   Respon: {inc.countermeasure_applied}
                 </div>
-                <div style={{ fontSize: '0.7rem', color: '#34d399', fontWeight: 600 }}>
+                <div style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>
                   Status: {inc.outcome}
                 </div>
               </div>

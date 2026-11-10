@@ -251,7 +251,7 @@ export default function App(): React.JSX.Element {
                 {activeModuleMeta.title}
               </span>
             </div>
-            <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', marginTop: '0.15rem' }}>
+            <h1 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '0.15rem' }}>
               {activeModuleMeta.title}
             </h1>
           </div>
@@ -286,7 +286,7 @@ export default function App(): React.JSX.Element {
                 alignItems: 'center',
                 justifyContent: 'center',
                 border: criticalDefects > 0 || bunkerAnomalies > 0 ? '1px solid var(--danger)' : '1px solid var(--border-color)',
-                color: criticalDefects > 0 || bunkerAnomalies > 0 ? 'var(--danger)' : '#cbd5e1',
+                color: criticalDefects > 0 || bunkerAnomalies > 0 ? 'var(--danger)' : 'var(--text-muted)',
               }}
               title="Pusat Peringatan Darurat Maritim"
             >

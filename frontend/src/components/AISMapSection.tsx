@@ -571,35 +571,36 @@ export default function AISMapSection(): React.JSX.Element {
               top: '16px',
               left: '16px',
               zIndex: 400,
-              background: 'rgba(13, 24, 53, 0.85)',
+              background: 'rgba(255, 255, 255, 0.92)',
               backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(0, 229, 255, 0.3)',
+              border: '1px solid var(--border-color)',
               borderRadius: '8px',
               padding: '0.65rem 0.85rem',
               display: 'flex',
               flexDirection: 'column',
               gap: '0.35rem',
               fontSize: '0.75rem',
-              color: '#f8fafc',
+              color: '#334155',
+              boxShadow: '0 4px 12px rgba(15, 23, 42, 0.1)',
             }}
           >
-            <div style={{ fontWeight: 700, color: 'var(--accent-cyan)', marginBottom: '2px' }}>
+            <div style={{ fontWeight: 700, color: '#0369a1', marginBottom: '2px' }}>
               LEGENDA ARMADA AIS
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#00e5ff' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#0284c7' }} />
               <span>Kapal Peti Kemas (Container)</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#f59e0b' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#d97706' }} />
               <span>Kapal Curah Kering (Bulk Carrier)</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#f43f5e' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '2px', background: '#dc2626' }} />
               <span>Kapal Tanker Minyak (Tanker)</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '4px', marginTop: '2px' }}>
-              <span style={{ width: '16px', height: '2px', background: '#00e5ff', display: 'inline-block' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', borderTop: '1px solid var(--border-color)', paddingTop: '4px', marginTop: '2px' }}>
+              <span style={{ width: '16px', height: '2px', background: '#0284c7', display: 'inline-block' }} />
               <span>Jalur ALKI &amp; TSS Malaka</span>
             </div>
           </div>
@@ -614,6 +615,7 @@ export default function AISMapSection(): React.JSX.Element {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
+            boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
           }}
         >
           {/* Header Panel */}
@@ -621,7 +623,7 @@ export default function AISMapSection(): React.JSX.Element {
             style={{
               padding: '1.25rem',
               borderBottom: '1px solid var(--border-color)',
-              background: 'linear-gradient(180deg, rgba(20, 40, 80, 0.95), rgba(16, 31, 66, 0.8))',
+              background: '#f8fafc',
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
@@ -630,17 +632,17 @@ export default function AISMapSection(): React.JSX.Element {
                   style={{
                     fontSize: '0.72rem',
                     fontWeight: 700,
-                    color: 'var(--accent-cyan)',
+                    color: '#0284c7',
                     letterSpacing: '0.05em',
                     textTransform: 'uppercase',
                   }}
                 >
                   TELEMETRI KAPAL AIS
                 </span>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-main)', marginTop: '2px' }}>
                   {selectedVessel?.name || 'Pilih Kapal'}
                 </h3>
-                <span style={{ fontSize: '0.78rem', color: '#94a3b8' }}>
+                <span style={{ fontSize: '0.78rem', color: '#64748b' }}>
                   {selectedVessel?.imo_number} • MMSI: {selectedVessel?.mmsi} • Call Sign: {selectedVessel?.call_sign}
                 </span>
               </div>
@@ -665,7 +667,7 @@ export default function AISMapSection(): React.JSX.Element {
               padding: '0.65rem 0.85rem',
               gap: '0.5rem',
               borderBottom: '1px solid var(--border-color)',
-              background: 'rgba(0,0,0,0.15)',
+              background: '#f8fafc',
               overflowX: 'auto',
             }}
           >
@@ -678,13 +680,13 @@ export default function AISMapSection(): React.JSX.Element {
                   borderRadius: '6px',
                   border:
                     selectedVessel?.vessel_id === v.vessel_id
-                      ? '1px solid var(--accent-cyan)'
-                      : '1px solid transparent',
+                      ? '1px solid #bae6fd'
+                      : '1px solid var(--border-color)',
                   background:
                     selectedVessel?.vessel_id === v.vessel_id
-                      ? 'rgba(0, 229, 255, 0.15)'
-                      : 'rgba(255, 255, 255, 0.05)',
-                  color: selectedVessel?.vessel_id === v.vessel_id ? '#ffffff' : '#94a3b8',
+                      ? '#e0f2fe'
+                      : '#ffffff',
+                  color: selectedVessel?.vessel_id === v.vessel_id ? '#0369a1' : '#475569',
                   fontSize: '0.75rem',
                   fontWeight: 600,
                   cursor: 'pointer',
@@ -705,11 +707,11 @@ export default function AISMapSection(): React.JSX.Element {
                   padding: '0.65rem 0.85rem',
                   borderRadius: '8px',
                   background: selectedVessel.nav_status.includes('Under way')
-                    ? 'rgba(16, 185, 129, 0.12)'
-                    : 'rgba(245, 158, 11, 0.12)',
+                    ? '#dcfce7'
+                    : '#fef3c7',
                   border: selectedVessel.nav_status.includes('Under way')
-                    ? '1px solid rgba(16, 185, 129, 0.3)'
-                    : '1px solid rgba(245, 158, 11, 0.3)',
+                    ? '1px solid #bbf7d0'
+                    : '1px solid #fde68a',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
@@ -717,15 +719,15 @@ export default function AISMapSection(): React.JSX.Element {
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   {selectedVessel.nav_status.includes('Under way') ? (
-                    <Navigation size={16} color="var(--success)" />
+                    <Navigation size={16} color="#059669" />
                   ) : (
-                    <Anchor size={16} color="var(--warning)" />
+                    <Anchor size={16} color="#d97706" />
                   )}
-                  <span style={{ fontSize: '0.82rem', fontWeight: 600, color: '#f8fafc' }}>
+                  <span style={{ fontSize: '0.82rem', fontWeight: 600, color: selectedVessel.nav_status.includes('Under way') ? '#166534' : '#92400e' }}>
                     {selectedVessel.nav_status}
                   </span>
                 </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#0369a1' }}>
                   {selectedVessel.vessel_type}
                 </span>
               </div>
@@ -743,30 +745,30 @@ export default function AISMapSection(): React.JSX.Element {
                     marginTop: '0.4rem',
                   }}
                 >
-                  <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.65rem', borderRadius: '8px' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Speed (SOG)</span>
-                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+                  <div style={{ background: '#f8fafc', padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Speed (SOG)</span>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0284c7' }}>
                       {selectedVessel.sog_knots} <span style={{ fontSize: '0.8rem' }}>kts</span>
                     </div>
                   </div>
 
-                  <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.65rem', borderRadius: '8px' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Course (COG)</span>
-                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#f8fafc' }}>
+                  <div style={{ background: '#f8fafc', padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Course (COG)</span>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-main)' }}>
                       {selectedVessel.cog_degrees}°
                     </div>
                   </div>
 
-                  <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.65rem', borderRadius: '8px' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Heading</span>
-                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#f8fafc' }}>
+                  <div style={{ background: '#f8fafc', padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Heading</span>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)' }}>
                       {selectedVessel.heading}°
                     </div>
                   </div>
 
-                  <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.65rem', borderRadius: '8px' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#94a3b8' }}>Main Engine RPM</span>
-                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent-teal)' }}>
+                  <div style={{ background: '#f8fafc', padding: '0.65rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                    <span style={{ fontSize: '0.72rem', color: '#64748b' }}>Main Engine RPM</span>
+                    <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#059669' }}>
                       {selectedVessel.main_engine_rpm} RPM
                     </div>
                   </div>
@@ -778,26 +780,26 @@ export default function AISMapSection(): React.JSX.Element {
                 <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>
                   KOORDINAT GPS &amp; RUTE
                 </span>
-                <div style={{ background: 'rgba(255,255,255,0.03)', padding: '0.75rem', borderRadius: '8px', marginTop: '0.4rem', fontSize: '0.82rem' }}>
+                <div style={{ background: '#f8fafc', padding: '0.75rem', borderRadius: '8px', marginTop: '0.4rem', fontSize: '0.82rem', border: '1px solid var(--border-color)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span style={{ color: '#94a3b8' }}>Latitude / Longitude:</span>
-                    <span style={{ fontWeight: 600, color: '#f8fafc' }}>
+                    <span style={{ color: '#64748b' }}>Latitude / Longitude:</span>
+                    <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
                       {selectedVessel.lat.toFixed(4)}° / {selectedVessel.lng.toFixed(4)}°
                     </span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span style={{ color: '#94a3b8' }}>Asal / Tujuan:</span>
-                    <span style={{ fontWeight: 600, color: 'var(--accent-cyan)' }}>
+                    <span style={{ color: '#64748b' }}>Asal / Tujuan:</span>
+                    <span style={{ fontWeight: 600, color: '#0284c7' }}>
                       {selectedVessel.departure_port.split(' ')[0]} → {selectedVessel.destination_port.split(' ')[0]}
                     </span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                    <span style={{ color: '#94a3b8' }}>Muatan Cargo:</span>
-                    <span style={{ fontWeight: 600 }}>{selectedVessel.cargo}</span>
+                    <span style={{ color: '#64748b' }}>Muatan Cargo:</span>
+                    <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{selectedVessel.cargo}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ color: '#94a3b8' }}>Sarat Kapal (Draft):</span>
-                    <span style={{ fontWeight: 600 }}>{selectedVessel.draft_meters} meter</span>
+                    <span style={{ color: '#64748b' }}>Sarat Kapal (Draft):</span>
+                    <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{selectedVessel.draft_meters} meter</span>
                   </div>
                 </div>
               </div>
@@ -809,8 +811,8 @@ export default function AISMapSection(): React.JSX.Element {
                 </span>
                 <div
                   style={{
-                    background: 'linear-gradient(145deg, rgba(0, 119, 182, 0.15), rgba(16, 31, 66, 0.4))',
-                    border: '1px solid rgba(0, 229, 255, 0.2)',
+                    background: '#f0f9ff',
+                    border: '1px solid #bae6fd',
                     padding: '0.85rem',
                     borderRadius: '8px',
                     marginTop: '0.4rem',
@@ -820,28 +822,28 @@ export default function AISMapSection(): React.JSX.Element {
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#cbd5e1' }}>
-                      <Waves size={15} color="var(--accent-cyan)" /> Tinggi Ombak
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#334155' }}>
+                      <Waves size={15} color="#0284c7" /> Tinggi Ombak
                     </span>
-                    <span style={{ fontWeight: 700, color: '#ffffff' }}>
+                    <span style={{ fontWeight: 700, color: '#0369a1' }}>
                       {selectedVessel.weather.wave_height_m} m ({selectedVessel.weather.sea_state})
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#cbd5e1' }}>
-                      <Wind size={15} color="var(--accent-teal)" /> Angin &amp; Arah
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#334155' }}>
+                      <Wind size={15} color="#059669" /> Angin &amp; Arah
                     </span>
-                    <span style={{ fontWeight: 700, color: '#ffffff' }}>
+                    <span style={{ fontWeight: 700, color: '#0369a1' }}>
                       {selectedVessel.weather.wind_knots} kts • {selectedVessel.weather.wind_dir}
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#cbd5e1' }}>
-                      <Gauge size={15} color="#94a3b8" /> Barometer Udara
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#334155' }}>
+                      <Gauge size={15} color="#64748b" /> Barometer Udara
                     </span>
-                    <span style={{ fontWeight: 700, color: '#ffffff' }}>
+                    <span style={{ fontWeight: 700, color: '#0369a1' }}>
                       {selectedVessel.weather.barometer_hpa} hPa
                     </span>
                   </div>

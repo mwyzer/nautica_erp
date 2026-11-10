@@ -102,11 +102,11 @@ export default function PortCallJITSection(): React.JSX.Element {
 
       {/* 2. Key Port Call JIT Savings KPI Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
-        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#131e3b', border: '1px solid #23385d' }}>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#ffffff', border: '1px solid var(--border-color)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>
             Total Biaya BBM Dihemat (JIT)
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#34d399' }}>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#059669' }}>
             +${totalCostSaved.toLocaleString()} USD
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -114,11 +114,11 @@ export default function PortCallJITSection(): React.JSX.Element {
           </div>
         </div>
 
-        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#131e3b', border: '1px solid #23385d' }}>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#ffffff', border: '1px solid var(--border-color)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>
             Waktu Lego Jangkar Dieliminasi
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#38bdf8' }}>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#0284c7' }}>
             {totalHoursWaitingEliminated.toFixed(1)} Jam
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -126,11 +126,11 @@ export default function PortCallJITSection(): React.JSX.Element {
           </div>
         </div>
 
-        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#131e3b', border: '1px solid #23385d' }}>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#ffffff', border: '1px solid var(--border-color)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>
             Reduksi Emisi CO2
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#22d3ee' }}>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#0891b2' }}>
             {(totalFuelSaved * 3.114).toFixed(1)} MT CO2
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -138,11 +138,11 @@ export default function PortCallJITSection(): React.JSX.Element {
           </div>
         </div>
 
-        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#131e3b', border: '1px solid #23385d' }}>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <div style={{ padding: '1.1rem', borderRadius: '10px', backgroundColor: '#ffffff', border: '1px solid var(--border-color)', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.04)' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: 600 }}>
             Risiko Demurrage Slot
           </div>
-          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#10b981' }}>
+          <div style={{ fontSize: '1.6rem', fontWeight: 700, margin: '0.35rem 0', color: '#059669' }}>
             0% (NIL)
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -152,15 +152,15 @@ export default function PortCallJITSection(): React.JSX.Element {
       </div>
 
       {/* 3. Port Call Schedules & Slot Coordination Table */}
-      <div style={{ padding: '1.25rem', backgroundColor: '#131e3b', borderRadius: '12px', border: '1px solid #23385d', marginBottom: '1.5rem' }}>
-        <h3 style={{ fontSize: '1.05rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-          <Anchor size={18} style={{ color: '#38bdf8' }} /> Jadwal Kedatangan Armada & Koordinasi Slot Sandar JIT
+      <div style={{ padding: '1.25rem', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid var(--border-color)', marginBottom: '1.5rem', boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)' }}>
+        <h3 style={{ fontSize: '1.05rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--text-main)' }}>
+          <Anchor size={18} style={{ color: '#0284c7' }} /> Jadwal Kedatangan Armada & Koordinasi Slot Sandar JIT
         </h3>
 
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.825rem', textAlign: 'left' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)', color: 'var(--text-secondary)' }}>
+              <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>
                 <th style={{ padding: '0.75rem 0.5rem' }}>Kapal & Voyase</th>
                 <th style={{ padding: '0.75rem 0.5rem' }}>Pelabuhan & Terminal</th>
                 <th style={{ padding: '0.75rem 0.5rem' }}>Dermaga Siap</th>
@@ -173,37 +173,37 @@ export default function PortCallJITSection(): React.JSX.Element {
             </thead>
             <tbody>
               {portCalls.map((call) => (
-                <tr key={call.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                <tr key={call.id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
-                    <div style={{ fontWeight: 600, color: '#f8fafc' }}>{call.vessel_name}</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{call.vessel_name}</div>
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>{call.voyage_number}</div>
                   </td>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
-                    <div style={{ color: '#38bdf8' }}>{call.destination_port}</div>
+                    <div style={{ color: '#0284c7', fontWeight: 600 }}>{call.destination_port}</div>
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>{call.terminal_berth}</div>
                   </td>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
-                    <div style={{ fontWeight: 500 }}>{call.berth_readiness_time}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#10b981' }}>JIT ETA: {call.jit_adjusted_eta}</div>
+                    <div style={{ fontWeight: 500, color: 'var(--text-main)' }}>{call.berth_readiness_time}</div>
+                    <div style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 600 }}>JIT ETA: {call.jit_adjusted_eta}</div>
                   </td>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
-                    <span style={{ color: '#94a3b8', textDecoration: 'line-through' }}>{call.full_ahead_speed_knots} kts</span>{' '}
-                    <span style={{ color: '#22d3ee', fontWeight: 700 }}>&rarr; {call.jit_recommended_speed_knots} kts</span>
+                    <span style={{ color: '#64748b', textDecoration: 'line-through' }}>{call.full_ahead_speed_knots} kts</span>{' '}
+                    <span style={{ color: '#0284c7', fontWeight: 700 }}>&rarr; {call.jit_recommended_speed_knots} kts</span>
                   </td>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
-                    <div style={{ fontWeight: 600, color: '#34d399' }}>+{call.fuel_saved_mt} MT</div>
+                    <div style={{ fontWeight: 600, color: '#059669' }}>+{call.fuel_saved_mt} MT</div>
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>+${call.cost_saved_usd.toLocaleString()} USD</div>
                   </td>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
-                    <span style={{ color: '#38bdf8', fontWeight: 600 }}>{call.anchorage_waiting_hours_saved} Jam</span>
+                    <span style={{ color: '#0284c7', fontWeight: 600 }}>{call.anchorage_waiting_hours_saved} Jam</span>
                   </td>
                   <td style={{ padding: '0.75rem 0.5rem' }}>
                     <span
                       style={{
                         padding: '0.2rem 0.5rem',
                         borderRadius: '4px',
-                        backgroundColor: call.vts_slot_status === 'CONFIRMED_JIT' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                        color: call.vts_slot_status === 'CONFIRMED_JIT' ? '#34d399' : '#fbbf24',
+                        backgroundColor: call.vts_slot_status === 'CONFIRMED_JIT' ? '#dcfce7' : '#fef3c7',
+                        color: call.vts_slot_status === 'CONFIRMED_JIT' ? '#166534' : '#92400e',
                         fontWeight: 600,
                         fontSize: '0.75rem',
                       }}
@@ -218,8 +218,8 @@ export default function PortCallJITSection(): React.JSX.Element {
                         style={{
                           padding: '0.35rem 0.65rem',
                           borderRadius: '6px',
-                          backgroundColor: '#38bdf8',
-                          color: '#0f172a',
+                          backgroundColor: '#0284c7',
+                          color: '#ffffff',
                           fontWeight: 600,
                           border: 'none',
                           cursor: 'pointer',
@@ -229,7 +229,7 @@ export default function PortCallJITSection(): React.JSX.Element {
                         Konfirmasi Slot
                       </button>
                     ) : (
-                      <span style={{ fontSize: '0.75rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <span style={{ fontSize: '0.75rem', color: '#059669', display: 'flex', alignItems: 'center', gap: '0.25rem', fontWeight: 600 }}>
                         <CheckCircle2 size={13} /> Terjadwal
                       </span>
                     )}
@@ -242,9 +242,9 @@ export default function PortCallJITSection(): React.JSX.Element {
       </div>
 
       {/* 4. Interactive Virtual Arrival Speed Calculator */}
-      <div style={{ padding: '1.25rem', backgroundColor: '#131e3b', borderRadius: '12px', border: '1px solid #23385d' }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-          <TrendingDown size={18} style={{ color: '#22d3ee' }} /> Kalkulator Virtual Arrival (JIT Eco-Speed Optimizer)
+      <div style={{ padding: '1.25rem', backgroundColor: '#ffffff', borderRadius: '12px', border: '1px solid var(--border-color)', boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)' }}>
+        <h3 style={{ fontSize: '1rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', color: 'var(--text-main)' }}>
+          <TrendingDown size={18} style={{ color: '#0284c7' }} /> Kalkulator Virtual Arrival (JIT Eco-Speed Optimizer)
         </h3>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(320px, 1.2fr)', gap: '1.25rem' }}>
@@ -261,7 +261,7 @@ export default function PortCallJITSection(): React.JSX.Element {
                 value={calcDistance}
                 aria-label="Sisa Jarak ke Pelabuhan"
                 onChange={(e) => setCalcDistance(Number(e.target.value))}
-                style={{ width: '100%', accentColor: '#38bdf8', cursor: 'pointer' }}
+                style={{ width: '100%', accentColor: '#0284c7', cursor: 'pointer' }}
               />
             </div>
 
@@ -277,7 +277,7 @@ export default function PortCallJITSection(): React.JSX.Element {
                 value={calcBerthHours}
                 aria-label="Waktu Kesiapan Dermaga"
                 onChange={(e) => setCalcBerthHours(Number(e.target.value))}
-                style={{ width: '100%', accentColor: '#22d3ee', cursor: 'pointer' }}
+                style={{ width: '100%', accentColor: '#0284c7', cursor: 'pointer' }}
               />
             </div>
 
@@ -287,8 +287,8 @@ export default function PortCallJITSection(): React.JSX.Element {
               style={{
                 width: '100%',
                 padding: '0.6rem',
-                backgroundColor: '#38bdf8',
-                color: '#0f172a',
+                backgroundColor: '#0284c7',
+                color: '#ffffff',
                 fontWeight: 600,
                 borderRadius: '8px',
                 border: 'none',
@@ -301,21 +301,21 @@ export default function PortCallJITSection(): React.JSX.Element {
           </div>
 
           {optResult && (
-            <div style={{ padding: '1rem', backgroundColor: '#0f172a', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+            <div style={{ padding: '1rem', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.5rem', fontWeight: 600 }}>
                 Hasil Rekomendasi JIT Virtual Arrival:
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '0.75rem' }}>
                 <div>
                   <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Kecepatan Optimal:</span>
-                  <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#22d3ee' }}>{optResult.jit_speed_knots} knots</div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#0284c7' }}>{optResult.jit_speed_knots} knots</div>
                 </div>
                 <div>
                   <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Hemat Bahan Bakar:</span>
-                  <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#34d399' }}>+{optResult.fuel_saved_mt} MT</div>
+                  <div style={{ fontSize: '1.2rem', fontWeight: 700, color: '#059669' }}>+{optResult.fuel_saved_mt} MT</div>
                 </div>
               </div>
-              <div style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: '1.4' }}>
+              <div style={{ fontSize: '0.8rem', color: '#334155', lineHeight: '1.4' }}>
                 {optResult.recommendation}
               </div>
             </div>

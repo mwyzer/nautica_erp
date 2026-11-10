@@ -220,7 +220,7 @@ export default function Sidebar({
     <aside style={{
       width: '280px',
       minWidth: '280px',
-      background: 'linear-gradient(180deg, #0d1835 0%, #0a1128 100%)',
+      background: '#ffffff',
       borderRight: '1px solid var(--border-color)',
       display: 'flex',
       flexDirection: 'column',
@@ -228,7 +228,7 @@ export default function Sidebar({
       position: 'sticky',
       top: 0,
       zIndex: 100,
-      boxShadow: '4px 0 24px rgba(0, 0, 0, 0.4)',
+      boxShadow: '2px 0 12px rgba(15, 23, 42, 0.04)',
     }}>
       {/* Brand Header */}
       <div style={{
@@ -242,21 +242,21 @@ export default function Sidebar({
           width: '40px',
           height: '40px',
           borderRadius: '10px',
-          background: 'rgba(0, 229, 255, 0.12)',
-          border: '1px solid rgba(0, 229, 255, 0.3)',
+          background: '#e0f2fe',
+          border: '1px solid #bae6fd',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'var(--accent-cyan)',
+          color: '#0284c7',
           flexShrink: 0,
         }}>
           <Layers size={22} />
         </div>
         <div>
-          <h1 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--accent-cyan)', letterSpacing: '0.04em', lineHeight: 1.2 }}>
+          <h1 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#0369a1', letterSpacing: '0.04em', lineHeight: 1.2 }}>
             NAUTICAL ERP
           </h1>
-          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: '0.72rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 600 }}>
             Enterprise Shipping Suite
           </span>
         </div>
@@ -276,7 +276,7 @@ export default function Sidebar({
             <div style={{
               fontSize: '0.68rem',
               fontWeight: 700,
-              color: '#94a3b8',
+              color: '#475569',
               padding: '0 0.75rem 0.4rem',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
@@ -299,35 +299,35 @@ export default function Sidebar({
                       padding: '0.65rem 0.85rem',
                       borderRadius: '8px',
                       border: isActive
-                        ? '1px solid rgba(0, 229, 255, 0.4)'
+                        ? '1px solid #bae6fd'
                         : '1px solid transparent',
                       background: isActive
-                        ? 'linear-gradient(90deg, rgba(0, 119, 182, 0.35), rgba(0, 229, 255, 0.15))'
+                        ? '#e0f2fe'
                         : item.highlight
-                        ? 'rgba(0, 229, 255, 0.05)'
+                        ? '#f8fafc'
                         : 'transparent',
                       color: isActive
-                        ? '#ffffff'
+                        ? '#0369a1'
                         : item.highlight
-                        ? 'var(--accent-cyan)'
-                        : '#cbd5e1',
+                        ? '#0284c7'
+                        : '#334155',
                       cursor: 'pointer',
                       textAlign: 'left',
                       transition: 'all 0.15s ease',
                       position: 'relative',
                     }}
                     onMouseEnter={(e) => {
-                      if (!isActive) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                      if (!isActive) e.currentTarget.style.background = '#f1f5f9';
                     }}
                     onMouseLeave={(e) => {
                       if (!isActive) {
-                        e.currentTarget.style.background = item.highlight ? 'rgba(0, 229, 255, 0.05)' : 'transparent';
+                        e.currentTarget.style.background = item.highlight ? '#f8fafc' : 'transparent';
                       }
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
                       <div style={{
-                        color: isActive ? 'var(--accent-cyan)' : '#94a3b8',
+                        color: isActive ? '#0284c7' : '#64748b',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -337,16 +337,17 @@ export default function Sidebar({
                       <div style={{ minWidth: 0 }}>
                         <div style={{
                           fontSize: '0.86rem',
-                          fontWeight: isActive ? 700 : 500,
+                          fontWeight: isActive ? 700 : 600,
                           whiteSpace: 'nowrap',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
+                          color: isActive ? '#0369a1' : '#0f172a',
                         }}>
                           {item.label}
                         </div>
                         <div style={{
                           fontSize: '0.7rem',
-                          color: '#94a3b8',
+                          color: isActive ? '#0284c7' : '#64748b',
                           whiteSpace: 'nowrap',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -362,14 +363,14 @@ export default function Sidebar({
                         fontWeight: 700,
                         padding: '0.15rem 0.45rem',
                         borderRadius: '9999px',
-                        background: item.badgeColor ? `${item.badgeColor}22` : 'rgba(255,255,255,0.1)',
-                        color: item.badgeColor || '#fff',
-                        border: `1px solid ${item.badgeColor || '#fff'}44`,
+                        background: item.badgeColor ? `${item.badgeColor}18` : '#e2e8f0',
+                        color: item.badgeColor || '#334155',
+                        border: `1px solid ${item.badgeColor || '#cbd5e1'}55`,
                       }}>
                         {item.badge}
                       </span>
                     ) : (
-                      isActive && <ChevronRight size={14} color="var(--accent-cyan)" />
+                      isActive && <ChevronRight size={14} color="#0284c7" />
                     )}
                   </button>
                 );
@@ -383,7 +384,7 @@ export default function Sidebar({
       <div style={{
         padding: '1rem 1.25rem',
         borderTop: '1px solid var(--border-color)',
-        background: 'rgba(0, 0, 0, 0.25)',
+        background: '#f8fafc',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -392,13 +393,13 @@ export default function Sidebar({
               height: '8px',
               borderRadius: '50%',
               background: 'var(--success)',
-              boxShadow: '0 0 8px var(--success)',
+              boxShadow: '0 0 6px rgba(16, 185, 129, 0.5)',
             }} />
-            <span style={{ fontSize: '0.78rem', color: '#cbd5e1', fontWeight: 600 }}>
+            <span style={{ fontSize: '0.78rem', color: '#334155', fontWeight: 600 }}>
               System Operational
             </span>
           </div>
-          <span style={{ fontSize: '0.7rem', color: '#64748b' }}>v1.0-mvp</span>
+          <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 500 }}>v1.0-mvp</span>
         </div>
       </div>
     </aside>
