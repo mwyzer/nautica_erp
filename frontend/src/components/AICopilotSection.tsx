@@ -42,7 +42,8 @@ export default function AICopilotSection(): React.JSX.Element {
       const data = await res.json();
 
       let reply = data.reply;
-      if (data.data && Array.isArray(data.data) && data.data.length > 0) {
+      // Format structured ERP entities if returned (fleet, voyages, bunker)
+      if (data.data && Array.isArray(data.data) && data.data.length > 0 && data.tool_executed !== 'maritime_regulation_rag') {
         const formattedItems = data.data.map((item: any) => {
           if (item.name && item.imo) {
             return `🚢 **${item.name}** (${item.imo}) — Status: \`${item.status}\` | Pelabuhan: ${item.port} | Burn: ${item.burn_rate_mt} MT/hari`;
@@ -54,9 +55,12 @@ export default function AICopilotSection(): React.JSX.Element {
             const flag = item.anomaly_flag ? `⚠️ [ANOMALI: ${item.reason}]` : '✅ Normal';
             return `⛽ Vessel #${item.vessel_id} (${item.fuel_type}) — ROB: ${item.current_rob_mt} MT | Konsumsi: ${item.daily_consumption_mt} MT/hari | ${flag}`;
           }
-          return `• ${JSON.stringify(item)}`;
-        });
-        reply += '\n\n' + formattedItems.join('\n');
+          return null;
+        }).filter(Boolean);
+
+        if (formattedItems.length > 0) {
+          reply += '\n\n' + formattedItems.join('\n');
+        }
       }
 
       setMessages(prev => [
